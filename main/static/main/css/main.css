@@ -15,6 +15,13 @@ body {
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Avenir eng';
+    src: url("../fonts/Avenir-Black.ttf") format("truetype");
+    font-weight: 800;
+    font-style: bold;
+}
+
 .nav-item .nav-link {
     font-family: Avenir;
     font-size: 16px;
@@ -32,24 +39,39 @@ svg {
   box-sizing: border-box;
   display: inline-flex;
   flex: 0 0 auto;
-  gap: 20px;
   align-items: center;
   justify-content: center;
-  width: 210px;
+  width: 220px;
   height: 60px;
-  font: 800 16px Avenir;
-  color: #212353;
-  letter-spacing: 0.08px;
+  letter-spacing: 1px;
   cursor: pointer;
   background: white;
   border: none;
-  border-radius: 50px;
+  border-radius: 80px;
   box-shadow: 0px 5px 5px rgba(75, 93, 104, 0.1);
+
+  color: var(--2, #212353);
+  font-family: 'Avenir eng';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0.08px;
+}
+
+#button-with-icon:hover{
+    background: black;
 }
 
 
 .svg-container {
-  display: flex;
-  width: 20px;
-  height: 20px;
+    margin-left: 10%;
+    margin-right: 0px;
+    width: 30px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+
+nav {
+    position: absolute;
 }
