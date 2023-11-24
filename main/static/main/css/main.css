@@ -1,0 +1,9 @@
+svg {
+    width: 49px;
+    height: 35px;
+    flex-shrink: 0;
+}
+
+body {
+    color: red;
+   }
