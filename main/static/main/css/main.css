@@ -1,11 +1,6 @@
-svg {
-    width: 49px;
-    height: 35px;
-    flex-shrink: 0;
-}
 
 body {
-    color: red;
+    color: black;
 }
 
 @font-face {
@@ -22,15 +17,20 @@ body {
     font-style: bold;
 }
 
+@font-face {
+    font-family: 'Avenir eng light';
+    src: url("../fonts/Avenir-Book.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
 .nav-item .nav-link {
     font-family: Avenir;
     font-size: 16px;
 }
 
+
 svg {
-    width: 49px;
-    height: 35px;
-    flex-shrink: 0;
     margin: 20px;
     margin-left: 100px;
 }
@@ -56,12 +56,18 @@ svg {
   font-style: normal;
   font-weight: 800;
   letter-spacing: 0.08px;
+
+  transition: box-shadow 0.8s;
 }
 
 #button-with-icon:hover{
-    background: black;
+    box-shadow: 0px 5px 5px #9C69E2;
+
 }
 
+#button-with-icon:focus{
+    outline: none;
+}
 
 .svg-container {
     margin-left: 10%;
