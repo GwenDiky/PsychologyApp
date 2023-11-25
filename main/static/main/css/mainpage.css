@@ -207,6 +207,8 @@
 
     padding: 100px 100px 100px 100px;
 
+    margin-bottom: 100px;
+
 }
 #fifth-section #white-block{
     margin-top: 70px;
@@ -268,4 +270,88 @@
     word-wrap: break-word;
 
     padding-top: 30px;
+}
+
+#sixth-block{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.upper-text-sixth{
+    color: #212353;
+    font-size: 40px;
+    font-family: Helvetica;
+    font-weight: 700;
+    line-height: 52px;
+    word-wrap: break-word;
+}
+
+.small-text-sixth{
+    color: #4B5D68;
+    font-size: 18px;
+    font-family: Avenir;
+    font-weight: 500;
+    line-height: 28.80px;
+    word-wrap: break-word;
+
+    margin-top: 10px;
+}
+
+.pink {
+    background-color: #F063B8;
+    font-family: 'Avenir eng light';
+}
+
+.white {
+    background-color: white;
+    color: #212353;
+    font-family: 'Avenir eng light';
+}
+
+.date-warehouse{
+    color: #212353;
+    font-size: 20px;
+    font-family: 'Avenir eng';
+    font-weight: 900;
+    line-height: 32px;
+    word-wrap: break-word;
+
+    margin-left: 10px;
+}
+
+.sixth-main-text{
+    color: #212353;
+    font-size: 16px;
+    font-family: Avenir;
+    font-weight: 500;
+    line-height: 28.80px;
+    letter-spacing: 0.16px;
+    word-wrap: break-word;
+
+    margin-top: 30px;
+}
+
+.sixth-hide-text{
+    color: #212353;
+    font-size: 16px;
+    font-family: 'Avenir eng light';
+    font-weight: 400;
+    line-height: 28.80px;
+    letter-spacing: 0.16px;
+    word-wrap: break-word;
+
+    margin-top: 30px;
+}
+
+.hide-end {
+    color: #212353;
+    font-size: 12px;
+    font-family: 'Avenir eng light';
+    font-weight: 400;
+    line-height: 21.60px;
+    letter-spacing: 0.12px;
+    word-wrap: break-word;
+
+    margin-top: 100px;
+    margin-bottom: 50px;
 }
