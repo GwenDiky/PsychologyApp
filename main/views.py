@@ -102,3 +102,17 @@ class MoodList(ListView):
 class SleepList(ListView):
     model = Mood
     context_object_name = "moods"
+
+class PhysicalActivityList(ListView):
+    model = Mood
+    context_object_name = "moods"
+
+
+class Entry(ListView):
+    model = Mood
+    context_object_name = "moods"
+
+
+class TestsList(ListView):
+    model = Mood
+    context_object_name = "moods"

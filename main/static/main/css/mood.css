@@ -21,7 +21,7 @@ p {
 
    margin-top: 40px;
    color: #261D1D;
-   font-size: 20px;
+   font-size: 18px;
    font-family: Inter;
    font-weight: 800;
 
@@ -53,23 +53,24 @@ p {
 
     text-align: center;
 
-    border-right: 1px solid var(--2, #212353);
-    border-left: 1px solid var(--2, #212353);
+    border-right: 3px dashed var(--2, #212353);
+    border-left: 3px dashed var(--2, #212353);
 
 }
 
 img {
-   height: 60%;
+   height: 40%;
 }
 
 
 .not-active{
-    font-size: 54px;
+    font-size: 44px;
     color: var(--2, #212353);
 }
 
 .previous-month {
     opacity: 0.60;
+
 }
 
 
