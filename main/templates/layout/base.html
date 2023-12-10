@@ -30,35 +30,45 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">О нас <span class="sr-only">(current)</span></a>
+
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'main:home' %}">Главная</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Помощь</a>
+                <a class="nav-link" href="{% url 'main:articles' %}">Статьи</a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Тесты</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Возможности
+                  Трекеры
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="{% url 'main:sleeping' %}">Трекер сна</a>
+                    <a class="dropdown-item">Трекер физической нагрузки</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="{% url 'main:moods' %}">Трекер эмоций</a>
                 </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" href="#">Войти</a>
+                <a class="nav-link" href="#">Дневник благодарности</a>
               </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Войти <span class="sr-only">(current)</span></a>
+              </li>
+
             </ul>
-              <button id="button-with-icon">Request Demo
-                  <svg class="svg-container">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
-                          <path d="M15 15L21 8L15 1" stroke="#9C69E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M21 8H1" stroke="#9C69E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <a href="{% url 'main:moods' %}">
+                  <button id="button-with-icon" >Создать трекер
+                      <svg class="svg-container" href="{% url 'main:moods' %}">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none"  >
+                              <path d="M15 15L21 8L15 1" stroke="#9C69E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                              <path d="M21 8H1" stroke="#9C69E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
                       </svg>
-                  </svg>
-              </button>
+                  </button>
+              </a>
           </div>
         </nav>
 

@@ -1,0 +1,33 @@
+.purple-button{
+    margin-top: 0px;
+    height: 55px;
+}
+
+.form-control {
+    height: 55px;
+}
+
+#validationCustom04 {
+    height: 55px;
+}
+
+#first-block {
+    margin-top: 75px;
+}
+
+#main-text {
+    width: 100%;
+    text-align: center;
+    color: var(--2, #212353);
+    font-size: 46px;
+    font-family: Helvetica;
+    font-weight: 700;
+    line-height: 59.80px;
+    word-wrap: break-word;
+
+    margin-top: 80px;
+}
+
+#second-block {
+    margin-top: 60px;
+}

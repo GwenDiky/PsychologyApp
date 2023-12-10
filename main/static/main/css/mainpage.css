@@ -2,7 +2,7 @@
 #save-text {
     color: var(--2, #212353);
     font-family: Helvetica;
-    font-size: 70px;
+    font-size: 55px;
     font-style: normal;
     font-weight: 700;
     line-height: 110%; /* 88px */
@@ -28,7 +28,7 @@
     border-radius: 50px;
     background: var(--3, #9C69E2);
 
-    font-family: 'Avenir eng';
+    font-family: 'Avenir middle';
     font-size: 18px;
     font-weight: 800;
     line-height: 160%;
@@ -78,7 +78,7 @@
 
 #text-second-section-light {
     color: var(--1, #4B5D68);
-    font-family: 'Avenir';
+    font-family: 'Avenir reg';
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
@@ -114,10 +114,16 @@
     line-height: 160%; /* 28.8px */
 
     margin-top: 30px;
+    text-align: center;6
 }
 
 #fourth-section{
     margin-top: 100px;
+}
+
+#fourth-section .row .bottom-text{
+    margin-top: 20px;
+    padding-bottom: 10px;
 }
 
 .upper-text{
@@ -143,6 +149,7 @@
     font-weight: 400;
     line-height: 25.60px;
     word-wrap: break-word
+
 }
 
 .bottom-text{
@@ -154,7 +161,7 @@
     letter-spacing: 0.08px;
     word-wrap: break-word;
 
-    padding-top: 30px;
+    padding-top: 10px;
 }
 
 #fourth-section img{
@@ -314,6 +321,7 @@
     font-family: 'Avenir eng';
     font-weight: 900;
     line-height: 32px;
+    word-wrap: break-word;
     word-wrap: break-word;
 
     margin-left: 10px;

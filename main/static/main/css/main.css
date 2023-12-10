@@ -6,9 +6,34 @@ body {
 @font-face {
     font-family: 'Avenir';
     src: url("../fonts/AvenirNextCyr-Medium.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Avenir reg';
+    src: url("../fonts/AvenirNextCyr-Regular.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Avenir middle';
+    src: url("../fonts/AvenirNextCyr-Medium.ttf") format("truetype");
     font-weight: 600;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'Avenir thin';
+    src: url("../fonts/AvenirNextCyr-Thin.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+
 
 @font-face {
     font-family: 'Avenir eng';

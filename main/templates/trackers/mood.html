@@ -1,0 +1,100 @@
+{% extends 'layout/base.html'%}
+{% load static %}
+
+{% block title %}
+    Трекер эмоций
+{% endblock %}
+
+{% block extra_head_links %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/mood.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <!-- Модальный -->
+    <div id="myModal" class="modal">
+
+      <!-- Модальное содержание -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Некоторый текст в модальном..</p>
+      </div>
+
+    </div>
+
+    <div class="colourful-section">
+        <div class="container" id="first-section">
+            <div class="row">
+                <p>Декабрь 2023</p>
+            </div>
+        </div>
+
+       <div class="wrapper">
+           <div></div>
+           <div class="dayOfWeek">Понедельник</div>
+           <div class="dayOfWeek">Вторник</div>
+           <div class="dayOfWeek">Среда</div>
+           <div class="dayOfWeek">Четверг</div>
+           <div class="dayOfWeek">Пятница</div>
+           <div class="dayOfWeek">Суббота</div>
+           <div class="dayOfWeek">Воскресенье</div>
+           <div></div>
+
+           <div></div>
+           <div class="paper-first-col not-active previous-month">28</div>
+           <div class="paper-first-col not-active previous-month">29</div>
+           <div class="paper-first-col not-active previous-month">30</div>
+           <div class="paper-first-col not-active previous-month">31</div>
+           <div class="paper-first-col" id="myBtn">
+               <img src="{% static 'main/img/mood1.png' %}">
+           </div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood26.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood3.png' %}"></div>
+           <div></div>
+
+           <div></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood4.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood5.png' %}"></div>
+           <div class="paper-first-col not-active">6</div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood26.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood27.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood9.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood10.png' %}"></div>
+           <div></div>
+
+           <div></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood25.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood12.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood13.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood14.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood15.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood28.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood24.png' %}"></div>
+           <div></div>
+
+           <div></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood18.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood19.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood27.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood21.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood26.png' %}"></div>
+           <div class="paper-first-col"><img src="{% static 'main/img/mood25.png' %}"></div>
+           <div class="paper-first-col not-active">24</div>
+           <div></div>
+
+           <div></div>
+           <div class="paper-first-col not-active">25</div>
+           <div class="paper-first-col not-active">26</div>
+           <div class="paper-first-col not-active">27</div>
+           <div class="paper-first-col not-active">28</div>
+           <div class="paper-first-col not-active">29</div>
+           <div class="paper-first-col not-active">30</div>
+           <div class="paper-first-col not-active">31</div>
+           <div></div>
+       </div>
+    </div>
+
+
+     <script src="{% static 'main/js/mood.js' %}"></script>
+
+{% endblock %}

@@ -1,9 +1,10 @@
 from django.forms import model_to_dict
 from django.shortcuts import render
+from django.views.generic import DetailView, ListView
 from rest_framework import generics, viewsets
 from rest_framework.decorators import action
 
-from .models import Mood
+from .models import Mood, Article
 from .serializers import MoodSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -84,3 +85,20 @@ def home(request):
     #     content = file.read()
 
     return render(request, 'main/main.html', {})
+
+
+class ArticleDetail(DetailView):
+    template = "article.html"
+
+
+class ArticleList(ListView):
+    model = Article
+    context_object_name = "articles"
+
+class MoodList(ListView):
+    model = Mood
+    context_object_name = "moods"
+
+class SleepList(ListView):
+    model = Mood
+    context_object_name = "moods"
