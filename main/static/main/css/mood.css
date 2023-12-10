@@ -53,6 +53,9 @@ p {
 
     text-align: center;
 
+    border-right: 1px solid var(--2, #212353);
+    border-left: 1px solid var(--2, #212353);
+
 }
 
 img {

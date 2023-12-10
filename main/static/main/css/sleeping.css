@@ -1,0 +1,118 @@
+p {
+    color: var(--2, #212353);
+    font-size: 64px;
+    font-family: Inter;
+    font-weight: 900;
+    word-wrap: break-word;
+
+    padding-left: 0px;
+}
+
+#first-section {
+    margin-top: 75px;
+    margin-left: 100px;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    column-gap: 30px;
+
+
+   margin-top: 40px;
+   color: #261D1D;
+   font-size: 20px;
+   font-family: Inter;
+   font-weight: 800;
+
+   word-wrap: break-word;
+
+}
+
+
+
+.wrapper .dayOfWeek {
+    border-radius: 44px;
+    border: 2px var(--2, #212353) solid;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    text-align: center;
+    padding-right: 40px; padding-left: 40px;
+
+    color: var(--2, #212353);
+
+}
+
+
+.paper-first-col{
+    height: 100%;
+    margin-top: 30px;
+
+    gap: 10px;
+
+    text-align: center;
+
+    border-right: 1px solid var(--2, #212353);
+    border-left: 1px solid var(--2, #212353);
+
+}
+
+img {
+   height: 60%;
+}
+
+
+.not-active{
+    font-size: 54px;
+    color: var(--2, #212353);
+}
+
+.previous-month {
+    opacity: 0.60;
+}
+
+
+
+/* Модальное окно */
+
+.modal {
+  display: none; /* Скрыто по умолчанию */
+  position: fixed; /* Оставаться на месте */
+  z-index: 1; /* Сидеть на вершине */
+  left: 0;
+  top: 0;
+  width: 100%; /* Полная ширина */
+  height: 100%; /* Полная высота */
+  overflow: auto; /* Включите прокрутку, если это необходимо */
+  background-color: rgb(0,0,0); /* Цвет запасной вариант */
+  background-color: rgba(0,0,0,0.4); /* Черный с непрозрачностью */
+}
+
+/* Модальное содержание/коробка */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% сверху и по центру */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Может быть больше или меньше, в зависимости от размера экрана */
+}
+
+
+/* Кнопка закрытия */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
