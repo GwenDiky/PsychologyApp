@@ -11,5 +11,6 @@ urlpatterns = [
     path('moods', MoodList.as_view(template_name="trackers/mood.html"), name='moods'),
     path('sleeping', SleepList.as_view(template_name="trackers/sleeping.html"), name='sleeping'),
     path('activity', PhysicalActivityList.as_view(template_name="trackers/physical_activity.html"), name='activity'),
-    path('tests', TestsList.as_view(template_name="trackers/tests.html"), name='tests'),
+    path('tests', TestsList.as_view(template_name="test/tests.html"), name='tests'),
+    path('diary/text-editor', TestsList.as_view(template_name="diary/text_editor.html"), name='text-editor'),
 ]
