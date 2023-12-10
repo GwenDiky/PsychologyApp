@@ -1,0 +1,27 @@
+.page {
+    background-color: #ebc4eb;
+    height: 300px;
+    margin-bottom: 40px;
+    box-shadow: 5px 2px 5px 2px #AA96DA;
+
+}
+
+p{
+    color: var(--1, #4B5D68);
+    font-family: 'Avenir middle';
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 160%; /* 28.8px */
+
+    margin-top: 20px;
+}
+
+
+#first-section {
+    margin-top: 70px;
+}
+
+.purple-button {
+    background-color: #AA96DA;
+    box-shadow: 5px 2px 5px 2px #9C69E2;
+}
