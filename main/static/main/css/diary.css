@@ -24,4 +24,6 @@ p{
 .purple-button {
     background-color: #AA96DA;
     box-shadow: 5px 2px 5px 2px #9C69E2;
+
+    font-size: 24spx;
 }

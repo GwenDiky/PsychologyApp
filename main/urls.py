@@ -20,4 +20,8 @@ urlpatterns = [
 
     path('diary/text-editor', TestsList.as_view(template_name="diary/text_editor.html"), name='text-editor'),
     path('diary', TestsList.as_view(template_name="diary/diary.html"), name='diary'),
+
+    path('profile', TestsList.as_view(template_name="profile.html"), name='profile'),
+    path('signin', TestsList.as_view(template_name="sign_in.html"), name='signin'),
+    path('signup', TestsList.as_view(template_name="sign_up.html"), name='signup'),
 ]

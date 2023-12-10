@@ -1,0 +1,39 @@
+ hr {
+    border: none;
+    background-color: red;
+    color: red;
+    height: 2px;
+   }
+
+#profile {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+#bio {
+    margin-top: 40px;
+}
+
+.purple-button{
+    background-color: orange;
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-family: 'Avenir middle';
+}
+
+ul li {
+    font-size: 20px;
+    font-family: 'Avenir reg';
+
+}
+
+p {
+    font-size: 24px;
+    font-family: 'Avenir reg';
+}
+
+#boild-text{
+    font-size: 26px;
+    font-family: 'Avenir middle';
+}
+

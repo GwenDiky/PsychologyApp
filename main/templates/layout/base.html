@@ -50,16 +50,25 @@
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{% url 'main:moods' %}">Трекер эмоций</a>
                 </div>
+
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Профиль
+                </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{% url 'main:signin' %}">Войти</a>
+                      <a class="dropdown-item" href="{% url 'main:signup' %}">Зарегистрироваться</a>
+                      <a class="dropdown-item" href="{% url 'main:profile' %}">Профиль</a>
+                  </div>
+                </li>
+
               </li>
+
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'main:diary' %}">Дневник благодарности</a>
               </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Войти <span class="sr-only">(current)</span></a>
-              </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Профиль <span class="sr-only">(current)</span></a>
-              </li>
+
+
 
             </ul>
               <a href="{% url 'main:moods' %}">

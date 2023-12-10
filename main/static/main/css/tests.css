@@ -118,10 +118,10 @@
 
 @keyframes change-color {
   0% {
-    box-shadow: 5px 5px 5px 2px #918151;
+    box-shadow: 5px 5px 5px 2px black;
   }
   50% {
-    box-shadow: 5px 2px 5px 2px #918151;
+    box-shadow: 5px 2px 5px 2px black;
     margin-top: -10px;
   }
 }

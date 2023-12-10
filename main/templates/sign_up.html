@@ -1,0 +1,73 @@
+{% extends 'layout/base.html'%}
+{% load static %}
+
+{% block title %}
+    Регистрация
+{% endblock %}
+
+{% block extra_head_links %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/mainpage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/tests.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/signup.css' %}">
+{% endblock %}
+
+{% block content %}
+  <body>
+    <div class="container">
+      <div class="main sing-up">
+        <div class="sing-in-form form-container">
+          <h1>Регистрация</h1>
+          <ul>
+            <li><i class="fa-brands fa-facebook-f"></i></li>
+            <li><i class="fa-brands fa-google-plus-g"></i></i></li>
+            <li><i class="fa-brands fa-linkedin-in"></i></i></li>
+          </ul>
+          <p>Или используйте свою электронную почту для регистрации</p>
+          <form onsubmit="event.preventDefault();" id="sign-in">
+            <input type="text" placeholder="Имя">
+            <input type="email" placeholder="Электронная почта">
+            <input type="password" placeholder="Пароль">
+            <button type="submit">Регистрация</button>
+          </form>
+        </div>
+        <div class="sing-up-form form-container">
+          <h1>Регистрация</h1>
+          <ul>
+            <li><i class="fa-brands fa-facebook-f"></i></li>
+            <li><i class="fa-brands fa-google-plus-g"></i></i></li>
+            <li><i class="fa-brands fa-linkedin-in"></i></i></li>
+          </ul>
+          <p>Или используйте свою электронную почту для регистрации</p>
+          <form onsubmit="event.preventDefault();" id="sign-out">
+            <input type="text" placeholder="Имя">
+            <input type="email" placeholder="Электронная почта">
+            <input type="password" placeholder="Пароль">
+            <button type="submit">Регистрация</button>
+          </form>
+        </div>
+        <div class="sliding-board">
+          <div class="wide-borad">
+            <div class="board sing-in">
+              <h1>Добро пожаловать!</h1>
+              <p>
+                Чтобы оставаться на связи с нами, пожалуйста, войдите, используя свои личные данные.
+              </p>
+              <button class="singIn">Регистрация</button>
+            </div>
+            <div class="board sing-up">
+              <h1>Привет, друг!</h1>
+              <p>Введите свои личные данные и начните путешествие вместе с нами</p>
+              <button class="singUp">Регистрация</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <script src="{% static 'main/js/sign_in.js' %}"></script>
+
+  </body>
+
+
+{% endblock %}
