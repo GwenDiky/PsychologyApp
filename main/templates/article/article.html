@@ -6,9 +6,67 @@
 {% endblock %}
 
 {% block extra_head_links %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/mainpage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/articles_list.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/article.css' %}">
 {% endblock %}
 
 {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col light-text" style="margin-top: 30px;">{{ article.date }}</div>
+        </div>
+        <div class="row" style="margin-bottom: 50px;">
+            <p id="text-second-section-bold" style="font-size: 25px;">{{ article.title }}</p>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="bold-text">Категория:</p>
+                <p class="light-text">{{ article.category }}</p>
+                <p class="bold-text">Время на прочтение:</p>
+                <p class="light-text">{{ article.time_for_read }} минут</p>
+            </div>
+            <div class="col">
+                <p class="bold-text">Авторы:</p>
+                <p class="light-text">{{ article.author }}</p>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 50px;">
+            <p class="light-text">{{ article.content }}</p>
+        </div>
+
+        <button onclick="topFunction()" id="myBtn" title="Go to top">↑</button>
+
+
+        {% if article.literature %}
+            <div class="row">
+                <p class="bold-text" style="margin-top: 20px; margin-bottom: 40px;">Список использованных источников:</p>
+                <p class="light-text">{{ article.literature }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("myBtn").style.display = "block";
+        } else {
+            document.getElementById("myBtn").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+
 
 {% endblock %}

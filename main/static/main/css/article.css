@@ -1,0 +1,20 @@
+.bold-text {
+    color: #212353;
+    font-family: Helvetica;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%; /* 52px */
+
+    text-align: left;
+}
+
+.light-text {
+    color: var(--1, #4B5D68);
+
+    font-family: Avenir;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%; /* 28.8px */
+}

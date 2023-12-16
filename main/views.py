@@ -1,10 +1,14 @@
+from django.db.models import Q
 from django.forms import model_to_dict
 from django.shortcuts import render
-from django.views.generic import DetailView, ListView
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, ListView, CreateView
+from datetime import datetime
 from rest_framework import generics, viewsets
 from rest_framework.decorators import action
 
-from .models import Mood, Article
+from .forms import SelectFormArticles, GratitudeJournalForm
+from .models import Mood, Article, RecordGratitudeJournal, Slumber
 from .serializers import MoodSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -86,14 +90,67 @@ def home(request):
 
     return render(request, 'main/main.html', {})
 
-
-class ArticleDetail(DetailView):
-    template = "article.html"
-
-
 class ArticleList(ListView):
     model = Article
-    context_object_name = "articles"
+    context_object_name = "object_list"
+    paginate_by = 5
+    form_class = SelectFormArticles
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        form = self.form_class(self.request.GET)
+
+        if self.request.method == 'GET' and form.is_valid():
+            selected_category = form.cleaned_data.get('category')
+            if selected_category:
+                queryset = queryset.filter(category=selected_category)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.form_class(self.request.GET)
+        return context
+
+
+class SearchResultsView(ListView):
+    model = Article
+    def get_queryset(self):
+        query = self.request.GET.get("title")
+        if query:
+            object_list = Article.objects.filter(
+                Q(title__icontains=query)
+            )
+            return object_list
+        else:
+            return Article.objects.all()
+
+
+class ArticleDetail(DetailView):
+    model = Article
+    context_object_name = 'article'
+
+
+class GratitudeJournalList(ListView):
+    model = RecordGratitudeJournal
+    context_object_name = 'records'
+
+    paginate_by = 2
+    def get_queryset(self):
+        return RecordGratitudeJournal.objects.filter(author=self.request.user)
+
+class GratitudeJournalCreateView(CreateView):
+    model = RecordGratitudeJournal
+    form_class = GratitudeJournalForm
+    success_url = reverse_lazy("main:home")
+
+class SlumberList(ListView):
+    model = Slumber
+    context_object_name = 'sleeping'
+
+    def get_queryset(self):
+        month = datetime.today().month
+        return Slumber.objects.filter(author=self.request.user, date__month=month)
 
 class MoodList(ListView):
     model = Mood

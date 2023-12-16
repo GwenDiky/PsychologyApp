@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/mainpage.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/tests.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/articles_list.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/diary.css' %}">
 {% endblock %}
 
@@ -19,25 +20,75 @@
     <div class="container" id="first-section">
 
         <div class="row">
-            <div class="col page">
+            {% for record in records %}
+            <div class="col-sm-5 page">
                 <p>
-                    Edgar Morin traz algo muito interessante, a superação da dicotomia entre natureza e cultura.  Compreender e aceitar que esses dois elementos então extremamente entrelaçados e interdependentes em vez de serem separados e opostos.
+                    {{ record.content }}
                 </p>
-
+                <p><b><i>Кому: </i></b>{{ record.to_whom }}</p>
+                <p><b><i>Дата: </i></b>{{ record.date }}</p>
             </div>
-            <div class="col-sm-1"></div>
-            <div class="col page">
-                <p>
-                    Entender que estamos ligados desde os primeiros átomos, até as primeiras sociedades, os primeiros organismos, e que todo acontecimento seja ele ambiental ou social fazem parte do que somos hoje, e usar isso para o ensino e aprendizagem é algo que nos revoluciona.
-                </p>
-            </div>
+             <div class="col-sm-1"></div>
+            {% endfor %}
         </div>
 
+
+        <br>
+
+         <div class="row">
+            {% include 'paginator/pagination.html' %}
+        </div>
 
         <div class="row">
-            <button class="purple-button">Добавить</button>
+            <a class="purple-button" style='text-decoration: none;' type="button" href="{% url 'main:text-editor' %}">Добавить</a>
         </div>
     </div>
+
+
+    <hr>
+
+    <div id="last-section" class="container">
+        <div class="row">
+            <div class="col-sm-4"><img src="{% static 'main/img/Logo.png' %}" class="img-fluid" alt="Responsive image"><span class="date-warehouse">Управление эмоциями</span>
+                <div class="row sixth-main-text">Минск, 234<br>
+                    Минск проспект Независимости 64
+                </div>
+                <div class="row sixth-hide-text">
+                    info@warehouse.project<br>
+                    1-232-3434
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <span class="date-warehouse">О нас</span>
+                <div class="row sixth-main-text" style="margin-left:10px;">Профиль</div>
+                <div class="row sixth-main-text" style="margin-left:10px;">Возможности</div>
+                <div class="row sixth-main-text" style="margin-left:10px;">Карьера</div>
+                <div class="row sixth-main-text" style="margin-left:10px;">Новости</div>
+            </div>
+            <div class="col-sm-2">
+                <span class="date-warehouse">Поддержка</span>
+                <div class="row sixth-main-text" style="margin-left:10px;">Поддержка</div>
+                <div class="row sixth-main-text" style="margin-left:10px;">Авторизация</div>
+                <div class="row sixth-main-text" style="margin-left:10px;">Гайд</div>
+                <div class="row sixth-main-text" style="margin-left:10px;">Отчеты</div>
+                <div class="row sixth-main-text" style="margin-left:10px;">Q&A</div>
+            </div>
+            <div class="col-sm-3">
+                <span class="date-warehouse">Социальные сети</span>
+                <img src="{% static 'main/img/SM.png' %}" class="img-fluid" alt="Responsive image" style="margin-top: 20px;">
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="seventh-block">
+        <div class="row hide-end">
+            © Datawarehouse™, 2020. All rights reserved.<br>
+            Company Registration Number: 21479524.
+        </div>
+    </div>
+
+
 
 
 {% endblock %}

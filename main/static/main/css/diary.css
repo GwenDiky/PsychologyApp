@@ -1,6 +1,5 @@
 .page {
-    background-color: #ebc4eb;
-    height: 300px;
+    background-color: whitesmoke;
     margin-bottom: 40px;
     box-shadow: 5px 2px 5px 2px #AA96DA;
 
@@ -26,4 +25,14 @@ p{
     box-shadow: 5px 2px 5px 2px #9C69E2;
 
     font-size: 24spx;
+}
+
+.purple-button {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+button:hover {
+    text-decoration: none;
+    color: white;
 }

@@ -11,6 +11,7 @@
 
 {% block content %}
 
+
     <!-- Модальный -->
     <div id="myModal" class="modal">
 
@@ -96,5 +97,11 @@
 
 
      <script src="{% static 'main/js/mood.js' %}"></script>
+
+    <br><br><br>
+    {% for sleep in sleeping %}
+<h1>{{ sleep.duration }}</h1>
+{{ sleep.date|date:"l" }}
+    {% endfor %}
 
 {% endblock %}

@@ -16,63 +16,127 @@
     <div id="main-text">Система управления эмоциями: Статьи</div>
     <div class="container" id="first-block">
         <div class="row">
-            <div class="col"></div>
-            <div class="col"></div>
             <div class="col">
-                <form id='categories' class="row g-3 needs-validation" novalidate>
-                    <select class="form-select" id="validationCustom04">
-                      <option selected disabled value="">Категории</option>
-                        <option>Психология</option>
-                        <option>Медицина</option>
-                        <option>Педагогика</option>
-                        <option>Психотерапия</option>
-                        <option>Медитация</option>
-                        <option>Психиатрия</option>
-                    </select>
+                <form id='category' method='get' action="{% url 'main:articles' %}" class="row g-3 needs-validation" novalidate>
+                  {% csrf_token %}
+                    <div class="col">
+                    <div class="mb-3">
+                        <select class="form-select" id="{{ form.category.id_for_label }}" name="{{ form.category.name }}" style="height: 55px;">
+                            <option value="" {% if not form.category.value %}selected{% endif %} disabled>Категория</option>
+                            {% for value, label in form.category.field.choices %}
+                                <option value="{{ value }}" {% if form.category.value == value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    </div>
+                    <div class="col">
+                        <button class="purple-button" type="submit">Отсортировать</button>
+                    </div>
                 </form>
             </div>
+            <div class="col-1"></div>
+            <div class="col-1"></div>
             <div class="col">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Статья: название" aria-label="Search">
-                    <button class="purple-button" type="submit">Search</button>
+                <form class="d-flex" action="{% url 'main:article_search' %}" method="get">
+                    <input name="title" class="form-control me-2" type="text" placeholder="Статья: название" aria-label="Search">
+                    <button class="purple-button" type="submit">Искать</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <div class="container" id="second-block">
-        <div class="row">
-            <div style="width: 100%; height: 100%; position: relative">
-                <div style="left: 0px; top: 481px; position: absolute; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex">
-                    <div style="color: #1E212C; font-size: 16px; font-family: Lato; font-weight: 700; line-height: 25.60px; word-wrap: break-word">Read</div>
-                    <div style="width: 24px; height: 24px; position: relative">
-                        <div style="width: 18px; height: 11px; left: 3px; top: 6.50px; position: absolute; background: #FF3F3A"></div>
+    {% for article in object_list %}
+        <div class="container" id="second-block">
+            <div class="row">
+                <div>
+                    <div>
                     </div>
-                </div>
-                <div style="left: 0px; top: 316px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: inline-flex">
-                    <div style="justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
-                        <div style="color: #787A80; font-size: 14px; font-family: Lato; font-weight: 700; line-height: 21px; word-wrap: break-word">HR & Recruting</div>
-                        <div style="width: 12px; height: 0px; transform: rotate(90deg); transform-origin: 0 0; border: 1px #787A80 solid"></div>
-                        <div style="justify-content: flex-start; align-items: center; gap: 8px; display: flex">
-                            <div style="width: 16px; height: 16px; position: relative">
-                                <div style="width: 14.33px; height: 14.33px; left: 0.83px; top: 0.83px; position: absolute; background: #787A80"></div>
+                    <div style="left: 0px; top: 316px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 8px; display: inline-flex">
+                        <div style="justify-content: flex-start; align-items: center; gap: 12px; display: inline-flex">
+                            <div style="color: #212353; font-size: 16px; font-family: Avenir; font-weight: 500; line-height: 21px; word-wrap: break-word">{{ article.category }}</div>
+                            <div style="width: 12px; height: 0px; transform: rotate(90deg); transform-origin: 0 0; border: 1px #787A80 solid"></div>
+                            <div style="justify-content: flex-start; align-items: center; gap: 8px; display: flex">
+                                <div style="width: 18px; height: 16px; position: relative">
+                                    <div style="width: 14.33px; height: 14.33px; left: 0.83px; top: 0.83px;background: var(--3, #9C69E2)"></div>
+                                </div>
+                                <div style="color: #21233; font-size: 16px; font-family: Avenir; font-weight: 500; line-height: 21px; word-wrap: break-word">{{ article.date }}</div>
                             </div>
-                            <div style="color: #787A80; font-size: 14px; font-family: Lato; font-weight: 400; line-height: 21px; word-wrap: break-word">August 3, 2020</div>
                         </div>
-                    </div>
-                    <div style="width: 705px; color: #1E212C; font-size: 20px; font-family: Lato; font-weight: 700; line-height: 30px; word-wrap: break-word">HR statistics: job search,  interviews, hiring and recruiting</div>
-                    <div style="width: 705px; color: #424551; font-size: 16px; font-family: Lato; font-weight: 400; line-height: 25.60px; word-wrap: break-word">Massa, lectus nibh consectetur aliquet nunc risus aenean. Leo hac netus bibendum diam adipiscing aenean nisl. Molestie nullam ante mattis ac sit vitae pellentesque mi etiam. Morbi commodo tempor, massa vivamus. A molestie id semper fermentum pretium...</div>
-                </div>
-                <img style="width: 705px; height: 300px; left: 0px; top: 0px; position: absolute; border-radius: 4px" src="https://via.placeholder.com/705x300" />
-                <div style="padding-left: 8px; padding-right: 8px; padding-top: 1px; padding-bottom: 1px; left: 12px; top: 12px; position: absolute; background: white; border-radius: 4px; overflow: hidden; justify-content: flex-start; align-items: flex-start; gap: 10px; display: inline-flex">
-                    <div style="justify-content: flex-start; align-items: center; gap: 4px; display: flex">
-                        <div style="width: 16px; height: 16px; padding-left: 2.33px; padding-right: 2.33px; padding-top: 0.83px; padding-bottom: 0.83px; justify-content: center; align-items: center; display: flex">
-                            <div style="width: 11.33px; height: 14.33px; background: #424551"></div>
-                        </div>
-                        <div style="color: #424551; font-size: 14px; font-family: Lato; font-weight: 400; line-height: 21px; word-wrap: break-word">Article</div>
+                        <div style="width: 80%; color: #212353; font-size: 20px; font-family: Avenir; font-weight: 700; line-height: 30px; word-wrap: break-word"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></div>
+                        <div style="width: 80%; color: #212353; font-size: 16px; font-family: Avenir; font-weight: 500; line-height: 25.60px; word-wrap: break-word">{{ article.content|truncatechars:400 }}</div>
                     </div>
                 </div>
             </div>
+        </div>
+
+    {% endfor %}
+
+    {% if object_list|length > 3 %}
+        <button onclick="topFunction()" id="myBtn" title="Go to top">↑</button>
+
+        <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+        </script>
+    {% endif %}
+
+
+    {% include 'paginator/pagination.html' %}
+
+    <hr>
+
+    <div id="last-section" class="container">
+        <div class="row">
+            <div class="col-sm-4"><img src="{% static 'main/img/Logo.png' %}" class="img-fluid" alt="Responsive image"><span class="date-warehouse">Управление эмоциями</span>
+                <div class="row sixth-main-text">Минск, 234<br>
+                    Минск проспект Независимости 64
+                </div>
+                <div class="row sixth-hide-text">
+                    info@warehouse.project<br>
+                    1-232-3434
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <span class="date-warehouse">О нас</span>
+                <div class="row sixth-main-text" style="margin-left:10px;">Профиль</div>
+                <div class="row sixth-main-text" style="margin-left:10px;">Возможности</div>
+                <div class="row sixth-main-text" style="margin-left:10px;">Карьера</div>
+                <div class="row sixth-main-text" style="margin-left:10px;">Новости</div>
+            </div>
+            <div class="col-sm-2">
+                <span class="date-warehouse">Поддержка</span>
+                <div class="row sixth-main-text" style="margin-left:10px;">Поддержка</div>
+                <div class="row sixth-main-text" style="margin-left:10px;">Авторизация</div>
+                <div class="row sixth-main-text" style="margin-left:10px;">Гайд</div>
+                <div class="row sixth-main-text" style="margin-left:10px;">Отчеты</div>
+                <div class="row sixth-main-text" style="margin-left:10px;">Q&A</div>
+            </div>
+            <div class="col-sm-3">
+                <span class="date-warehouse">Социальные сети</span>
+                <img src="{% static 'main/img/SM.png' %}" class="img-fluid" alt="Responsive image" style="margin-top: 20px;">
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="seventh-block">
+        <div class="row hide-end">
+            © Datawarehouse™, 2020. All rights reserved.<br>
+            Company Registration Number: 21479524.
         </div>
     </div>
 
