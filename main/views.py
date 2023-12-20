@@ -1,12 +1,13 @@
 from django.db.models import Q
-from django.forms import model_to_dict
+from collections import defaultdict
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView
-from datetime import datetime
+from datetime import datetime, timedelta
 from rest_framework import generics, viewsets
 from rest_framework.decorators import action
-
+import itertools
+import calendar
 from .forms import SelectFormArticles, GratitudeJournalForm
 from .models import Mood, Article, RecordGratitudeJournal, Slumber
 from .serializers import MoodSerializer
@@ -25,10 +26,10 @@ class MoodAPIUpdate(generics.UpdateAPIView):
     queryset = Mood.objects.all()
     serializer_class = MoodSerializer
 
-    @action(methods=['get'], detail=False)
-    def category(self, request):
-        cats = Category.objects.all()
-        return Response({'cats':[c.name ]})
+    # @action(methods=['get'], detail=False)
+    # def category(self, request):
+    #     cats = Category.objects.all()
+    #     return Response({'cats':[c.name ]})
 
 
 # class MoodAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -148,9 +149,128 @@ class SlumberList(ListView):
     model = Slumber
     context_object_name = 'sleeping'
 
+    # def get_queryset(self):
+    #     month = datetime.today().month
+    #     return Slumber.objects.filter(author=self.request.user, date__month=month)
+
+    # def get_queryset(self):
+    #     current_month = datetime.today().month # get the current month
+    #     query_set = Slumber.objects.filter(author=self.request.user, date__month=current_month) # get records of the current user
+    #
+    #     # the structure of the dict like: {"Понедельник":[days]}
+    #     d = {'Понедельник':[],
+    #          'Вторник':[],
+    #          'Среда':[],
+    #          'Четверг':[],
+    #          'Пятница':[],
+    #          'Суббота':[],
+    #          'Воскресенье':[]}
+    #
+    #     for day in query_set:
+    #         day_of_week = day.date.strftime('%A')
+    #
+    #         if day_of_week == "Monday":
+    #             d['Понедельник'].append(day)
+    #         elif day_of_week == "Tuesday":
+    #             d['Вторник'].append(day)
+    #         elif day_of_week == "Wednesday":
+    #             d['Среда'].append(day)
+    #         elif day_of_week == "Thursday":
+    #             d['Четверг'].append(day)
+    #         elif day_of_week == "Friday":
+    #             d["Пятница"].append(day)
+    #         elif day_of_week == "Saturday":
+    #             d["Суббота"].append(day)
+    #         else:
+    #             d["Воскресенье"].append(day)
+    #
+    #
+    #     return d # d = [{"Понедельник":[day1, day2], "Вторник":..}]
+
     def get_queryset(self):
-        month = datetime.today().month
-        return Slumber.objects.filter(author=self.request.user, date__month=month)
+        current_month = datetime.today().month  # get the current month
+        query_set = Slumber.objects.filter(author=self.request.user,
+                                           date__month=current_month)  # get records of the current user
+
+        d = {
+            'Понедельник': [],
+            'Вторник': [],
+            'Среда': [],
+            'Четверг': [],
+            'Пятница': [],
+            'Суббота': [],
+            'Воскресенье': []
+        }
+
+        # Определение первого дня месяца
+        first_day_of_month = datetime(datetime.today().year, current_month, 1)
+
+        # Определение последнего дня месяца
+        last_day_of_month = datetime(datetime.today().year, current_month % 12 + 1, 1) - timedelta(days=1)
+
+        # Создание списка всех дней месяца
+        all_days_of_month = [first_day_of_month + timedelta(days=x) for x in
+                             range((last_day_of_month - first_day_of_month).days + 1)]
+
+        # Заполнение данными из query_set
+        for day in query_set:
+            day_of_week = day.date.strftime('%A')
+            if day_of_week == "Monday":
+                d["Понедельник"].append(day)
+            elif day_of_week == "Tuesday":
+                d["Вторник"].append(day)
+            elif day_of_week == "Wednesday":
+                d["Среда"].append(day)
+            elif day_of_week == "Thursday":
+                d["Четверг"].append(day)
+            elif day_of_week == "Friday":
+                d["Пятница"].append(day)
+            elif day_of_week == "Saturday":
+                d["Суббота"].append(day)
+            else:
+                d["Воскресенье"].append(day)
+
+
+
+        # numberOfDays = calendar.monthrange(datetime.today().year, current_month)[1] # кол-во месяцев в текущем месяце
+        # first_day_of_the_week = first_day_of_month.strftime('%A')
+
+
+        # # перевод дня неделю на русский
+        # if first_day_of_the_week == "Monday":
+        #     first_day_of_the_week = "Понедельнки"
+        # elif first_day_of_the_week == "Tuesday":
+        #     first_day_of_the_week = "Вторник"
+        # elif first_day_of_the_week == "Wednesday":
+        #     first_day_of_the_week = "Среда"
+        # elif first_day_of_the_week == "Thursday":
+        #     first_day_of_the_week = "Четверг"
+        # elif first_day_of_the_week == "Friday":
+        #     first_day_of_the_week = "Пятница"
+        # elif first_day_of_the_week == "Saturday":
+        #     first_day_of_the_week = "Суббота"
+        # else:
+        #     first_day_of_the_week = "Воскресенье"
+        #
+        #
+        # # определяем какие дни заняты
+        # filed_out_days = []
+        # for day in query_set:
+        #     filed_out_days.append(day.date.day)
+        #
+        # week = itertools.cycle(['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'])
+        # i = next(week)
+        # while i != first_day_of_the_week:
+        #     next(week)
+        #
+        # for i in range(1, numberOfDays): # итерация по каждому дню месяца
+        #     if i in filed_out_days: # есть ли дата по такому дню
+        #         next(week)
+        #         continue
+        #     d[next(week)] = i
+
+        return d
+
 
 class MoodList(ListView):
     model = Mood
