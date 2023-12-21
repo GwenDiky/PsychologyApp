@@ -24,142 +24,31 @@
            <div></div>
         </div>
 
-        {% for day_of_week, values in sleeping.items %}
-            <h5>{{ day_of_week }}</h5>
-            {% for val in values %}
-                {{ val }}
-            {% endfor %}
-            <br>
-        {% endfor %}
-
-<!--        <div class="wrapper">-->
-<!--                {% for sleep in sleeping %}-->
-<!--                <div></div>-->
-<!--                <div class="col">-->
-<!--                    {% if sleep.date|date:"l" == "Понедельник" %}-->
-<!--                        {% if sleep.date|date:"l" == "Понедельник" %} Пон-->
-<!--                            {% if sleep.duration == 1 %} <img src="{% static 'main/img/1.png' %}">-->
-<!--                            {% elif sleep.duration == 2 %} <img src="{% static 'main/img/2.png' %}">-->
-<!--                            {% elif sleep.duration == 3 %} <img src="{% static 'main/img/3.png' %}">-->
-<!--                            {% elif sleep.duration == 4 %} <img src="{% static 'main/img/4.png' %}">-->
-<!--                            {% elif sleep.duration == 5 %} <img src="{% static 'main/img/5.png' %}">-->
-<!--                            {% elif sleep.duration == 6 %} <img src="{% static 'main/img/6.png' %}">-->
-<!--                            {% elif sleep.duration == 7 %} <img src="{% static 'main/img/7.png' %}">-->
-<!--                            {% elif sleep.duration == 8 %} <img src="{% static 'main/img/8.png' %}">-->
-<!--                            {% elif sleep.duration == 9 %} <img src="{% static 'main/img/9.png' %}">-->
-<!--                            {% else %} sleep.duration {% endif %}-->
-<!--                        {% else %}-->
-<!--                            Нет-->
-<!--                        {% endif %}-->
-<!--                </div>-->
-<!--                <div class="col">-->
-<!--                    {% elif sleep.date|date:"l" == "Вторник" %} Вт-->
-<!--                        {% if sleep.date|date:"l" == "Вторник" %} Вт-->
-<!--                            {% if sleep.duration == 1 %} <img src="{% static 'main/img/1.png' %}">-->
-<!--                            {% elif sleep.duration == 2 %} <img src="{% static 'main/img/2.png' %}">-->
-<!--                            {% elif sleep.duration == 3 %} <img src="{% static 'main/img/3.png' %}">-->
-<!--                            {% elif sleep.duration == 4 %} <img src="{% static 'main/img/4.png' %}">-->
-<!--                            {% elif sleep.duration == 5 %} <img src="{% static 'main/img/5.png' %}">-->
-<!--                            {% elif sleep.duration == 6 %} <img src="{% static 'main/img/6.png' %}">-->
-<!--                            {% elif sleep.duration == 7 %} <img src="{% static 'main/img/7.png' %}">-->
-<!--                            {% elif sleep.duration == 8 %} <img src="{% static 'main/img/8.png' %}">-->
-<!--                            {% elif sleep.duration == 9 %} <img src="{% static 'main/img/9.png' %}">-->
-<!--                            {% else %} sleep.duration {% endif %}-->
-<!--                        {% else %}-->
-<!--                            Нет-->
-<!--                        {% endif %}-->
-<!--                </div>-->
-<!--                <div class="col">-->
-<!--                    {% elif sleep.date|date:"l" == "Среда" %} Ср-->
-<!--                        {% if sleep.date|date:"l" == "Среда" %} Ср-->
-<!--                            {% if sleep.duration == 1 %} <img src="{% static 'main/img/1.png' %}">-->
-<!--                            {% elif sleep.duration == 2 %} <img src="{% static 'main/img/2.png' %}">-->
-<!--                            {% elif sleep.duration == 3 %} <img src="{% static 'main/img/3.png' %}">-->
-<!--                            {% elif sleep.duration == 4 %} <img src="{% static 'main/img/4.png' %}">-->
-<!--                            {% elif sleep.duration == 5 %} <img src="{% static 'main/img/5.png' %}">-->
-<!--                            {% elif sleep.duration == 6 %} <img src="{% static 'main/img/6.png' %}">-->
-<!--                            {% elif sleep.duration == 7 %} <img src="{% static 'main/img/7.png' %}">-->
-<!--                            {% elif sleep.duration == 8 %} <img src="{% static 'main/img/8.png' %}">-->
-<!--                            {% elif sleep.duration == 9 %} <img src="{% static 'main/img/9.png' %}">-->
-<!--                            {% else %} sleep.duration {% endif %}-->
-<!--                        {% else %}-->
-<!--                            Нет-->
-<!--                        {% endif %}-->
-<!--                </div>-->
-<!--                <div class="col">-->
-<!--                    {% elif sleep.date|date:"l" == "Четвeрг " %} Чт-->
-<!--                        {% if sleep.date|date:"l" == "Четвeрг " %} Чт-->
-<!--                            {% if sleep.duration == 1 %} <img src="{% static 'main/img/1.png' %}">-->
-<!--                            {% elif sleep.duration == 2 %} <img src="{% static 'main/img/2.png' %}">-->
-<!--                            {% elif sleep.duration == 3 %} <img src="{% static 'main/img/3.png' %}">-->
-<!--                            {% elif sleep.duration == 4 %} <img src="{% static 'main/img/4.png' %}">-->
-<!--                            {% elif sleep.duration == 5 %} <img src="{% static 'main/img/5.png' %}">-->
-<!--                            {% elif sleep.duration == 6 %} <img src="{% static 'main/img/6.png' %}">-->
-<!--                            {% elif sleep.duration == 7 %} <img src="{% static 'main/img/7.png' %}">-->
-<!--                            {% elif sleep.duration == 8 %} <img src="{% static 'main/img/8.png' %}">-->
-<!--                            {% elif sleep.duration == 9 %} <img src="{% static 'main/img/9.png' %}">-->
-<!--                            {% else %} sleep.duration {% endif %}-->
-<!--                        {% else %}-->
-<!--                            Нет-->
-<!--                        {% endif %}-->
-
-<!--                    </div>-->
-<!--                <div class="col">-->
-<!--                    {% elif sleep.date|date:"l" == "Пятница" %} Пятница-->
-<!--                        {% if sleep.date|date:"l" == "Пятница" %} Пятница-->
-<!--                            {% if sleep.duration == 1 %} <img src="{% static 'main/img/1.png' %}">-->
-<!--                            {% elif sleep.duration == 2 %} <img src="{% static 'main/img/2.png' %}">-->
-<!--                            {% elif sleep.duration == 3 %} <img src="{% static 'main/img/3.png' %}">-->
-<!--                            {% elif sleep.duration == 4 %} <img src="{% static 'main/img/4.png' %}">-->
-<!--                            {% elif sleep.duration == 5 %} <img src="{% static 'main/img/5.png' %}">-->
-<!--                            {% elif sleep.duration == 6 %} <img src="{% static 'main/img/6.png' %}">-->
-<!--                            {% elif sleep.duration == 7 %} <img src="{% static 'main/img/7.png' %}">-->
-<!--                            {% elif sleep.duration == 8 %} <img src="{% static 'main/img/8.png' %}">-->
-<!--                            {% elif sleep.duration == 9 %} <img src="{% static 'main/img/9.png' %}">-->
-<!--                            {% else %} sleep.duration {% endif %}-->
-<!--                        {% else %}-->
-<!--                            Нет-->
-<!--                        {% endif %}-->
-<!--                </div>-->
-<!--                <div class="col">-->
-<!--                    {% elif sleep.date|date:"l" == "Суббота" %} Суббота-->
-<!--                        {% if sleep.date|date:"l" == "Суббота" %} Суббота-->
-<!--                            {% if sleep.duration == 1 %} <img src="{% static 'main/img/1.png' %}">-->
-<!--                            {% elif sleep.duration == 2 %} <img src="{% static 'main/img/2.png' %}">-->
-<!--                            {% elif sleep.duration == 3 %} <img src="{% static 'main/img/3.png' %}">-->
-<!--                            {% elif sleep.duration == 4 %} <img src="{% static 'main/img/4.png' %}">-->
-<!--                            {% elif sleep.duration == 5 %} <img src="{% static 'main/img/5.png' %}">-->
-<!--                            {% elif sleep.duration == 6 %} <img src="{% static 'main/img/6.png' %}">-->
-<!--                            {% elif sleep.duration == 7 %} <img src="{% static 'main/img/7.png' %}">-->
-<!--                            {% elif sleep.duration == 8 %} <img src="{% static 'main/img/8.png' %}">-->
-<!--                            {% elif sleep.duration == 9 %} <img src="{% static 'main/img/9.png' %}">-->
-<!--                            {% else %} sleep.duration {% endif %}-->
-<!--                        {% else %}-->
-<!--                            Нет-->
-<!--                        {% endif %}-->
-<!--                </div>-->
-<!--                <div class="col">-->
-<!--                    {% elif sleep.date|date:"l" == "Воскресенье" %} Воскресенье-->
-<!--                        {% if sleep.date|date:"l" == "Воскресенье" %} Воскресенье-->
-<!--                        {% if sleep.duration == 1 %} <img src="{% static 'main/img/1.png' %}">-->
-<!--                        {% elif sleep.duration == 2 %} <img src="{% static 'main/img/2.png' %}">-->
-<!--                        {% elif sleep.duration == 3 %} <img src="{% static 'main/img/3.png' %}">-->
-<!--                        {% elif sleep.duration == 4 %} <img src="{% static 'main/img/4.png' %}">-->
-<!--                        {% elif sleep.duration == 5 %} <img src="{% static 'main/img/5.png' %}">-->
-<!--                        {% elif sleep.duration == 6 %} <img src="{% static 'main/img/6.png' %}">-->
-<!--                        {% elif sleep.duration == 7 %} <img src="{% static 'main/img/7.png' %}">-->
-<!--                        {% elif sleep.duration == 8 %} <img src="{% static 'main/img/8.png' %}">-->
-<!--                        {% elif sleep.duration == 9 %} <img src="{% static 'main/img/9.png' %}">-->
-<!--                        {% else %} sleep.duration {% endif %}-->
-<!--                        {% else %}-->
-<!--                            Нет-->
-<!--                        {% endif %}-->
-<!--                    {% endif %}-->
-<!--                </div>-->
-<!--            <div></div>-->
-<!--                {% endfor %}-->
-<!--        </div>-->
-
+            <div class="wrapper">
+                {% for day_of_week, values in sleeping.items %}
+                    <div class="col">
+                        {% for val in values %}
+                            <div class="day">
+                                {% if val.date %}
+                                    {{ val.date|date:'d' }}
+                                    {% if val.duration == 1 %} <img src="{% static 'main/img/1.png' %}">
+                                    {% elif val.duration == 2 %} <img src="{% static 'main/img/2.png' %}">
+                                    {% elif val.duration == 3 %} <img src="{% static 'main/img/3.png' %}">
+                                    {% elif val.duration == 4 %} <img src="{% static 'main/img/4.png' %}">
+                                    {% elif val.duration == 5 %} <img src="{% static 'main/img/5.png' %}">
+                                    {% elif val.duration == 6 %} <img src="{% static 'main/img/6.png' %}">
+                                    {% elif val.duration == 7 %} <img src="{% static 'main/img/7.png' %}">
+                                    {% elif val.duration == 8 %} <img src="{% static 'main/img/8.png' %}">
+                                    {% elif val.duration == 9 %} <img src="{% static 'main/img/9.png' %}">
+                                    {% else %} val.duration {% endif %}
+                                {% else %}
+                                    {{ val }}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
 
 
 {% endblock %}
