@@ -207,7 +207,48 @@ class SlumberList(ListView):
                 return val
             d[day_of_week].sort(key=custom_sort)
 
+
+        # Добавляем пропуски первым элементом списка, если день в месяце не первый. Добавляем до того момента, пока не найдем первый день
+        """
+        Итог:
+            1 2 3
+        6 7 8 9 10
+        """
+
+        if 1 not in d['Monday']:
+            d['Monday'].insert(0, '-')
+            if 1 not in d['Tuesday']:
+                d['Tuesday'].insert(0, '-')
+                if 1 not in d['Wednesday']:
+                    d['Wednesday'].insert(0, '-')
+                    if 1 not in d['Thursday']:
+                        d['Thursday'].insert(0, '-')
+                        if 1 not in d['Friday']:
+                            d['Friday'].insert(0, '-')
+                            if 1 not in d['Saturday']:
+                                d['Saturday'].insert(0, '-')
+
         return d
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        current_month = datetime.today().month  # get the current month
+        query_set = Slumber.objects.filter(author=self.request.user,
+                                           date__month=current_month)
+
+        count_of_sleeping_in_month = 0
+        count_of_quality_in_month = 0
+
+        for day in query_set:
+            count_of_sleeping_in_month += day.duration
+            count_of_quality_in_month += day.quality
+
+
+        data['average_slumber'] = count_of_sleeping_in_month / len(query_set)
+        data['average_quality'] = count_of_quality_in_month / len(query_set)
+
+        return data
 
 
 class MoodList(ListView):

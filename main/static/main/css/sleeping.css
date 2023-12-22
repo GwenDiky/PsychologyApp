@@ -16,16 +16,15 @@ p {
 .wrapper {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    column-gap: 30px;
 
+    column-gap: 10px;
 
-   margin-top: 40px;
-   color: #261D1D;
-   font-size: 20px;
-   font-family: Inter;
-   font-weight: 800;
+    color: #261D1D;
+    font-size: 18px;
+    font-family: Inter;
+    font-weight: 800;
 
-   word-wrap: break-word;
+    word-wrap: break-word;
 
 }
 
@@ -39,7 +38,7 @@ p {
     gap: 10px;
 
     text-align: center;
-    padding-right: 40px; padding-left: 40px;
+    padding-right: 20px; padding-left: 20px;
 
     color: var(--2, #212353);
 
@@ -50,23 +49,22 @@ p {
     height: 100%;
     margin-top: 30px;
 
-    gap: 10px;
-
     text-align: center;
-
-    border-right: 4px dotted var(--2, #212353);
-    border-left: 4px dotted var(--2, #212353);
 
 }
 
 img {
-   height: 60%;
+   height: 80px;
+   margin-top: 30px;
+   paddint-right: 10px;
 }
 
 
+
 .not-active{
-    font-size: 54px;
+    font-size: 58px;
     color: var(--2, #212353);
+    padding-right: 10px;
 }
 
 .previous-month {
