@@ -2,34 +2,33 @@
 {% load static %}
 
 {% block title %}
-    Трекер сна
+    Трекер физической нагрузки
 {% endblock %}
 
 {% block extra_head_links %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/sleeping.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/mainpage.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/physical_activity.css' %}">
 {% endblock %}
 
 {% block content %}
-
-    <!-- Модальный -->
-    <div id="myModal" class="modal">
-
-      <!-- Модальное содержание -->
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Некоторый текст в модальном..</p>
-      </div>
-
-    </div>
-
-    <div class="colourful-section">
-        <div class="container" id="first-section">
-            <div class="row">
-                <p>Декабрь 2023</p>
+<div class="additional-content">
+        <div class="row">
+            <div class="col-sm-4">
+                <p>Декабрь, 2023</p>
+            </div>
+            <div class="col">
+                <a href="{% url 'main:activity-editor' %}">
+                      <button class="purple-button" style="margin-top: 20px; background-color: red;">
+                          <span class="add">Добавить запись</span>
+                      </button>
+                </a>
             </div>
         </div>
+    </div>
 
-       <div class="wrapper">
+
+        <div class="wrapper">
            <div></div>
            <div class="dayOfWeek">Понедельник</div>
            <div class="dayOfWeek">Вторник</div>
@@ -39,62 +38,148 @@
            <div class="dayOfWeek">Суббота</div>
            <div class="dayOfWeek">Воскресенье</div>
            <div></div>
+        </div>
 
-           <div></div>
-           <div class="paper-first-col not-active previous-month">28</div>
-           <div class="paper-first-col not-active previous-month">29</div>
-           <div class="paper-first-col not-active previous-month">30</div>
-           <div class="paper-first-col not-active previous-month">31</div>
-           <div class="paper-first-col" id="myBtn">
-               <img src="{% static 'main/img/sport1.png' %}">
-           </div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport2.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport3.png' %}"></div>
-           <div></div>
-
-           <div></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport2.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport4.png' %}"></div>
-           <div class="paper-first-col not-active">6</div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport5.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport6.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport7.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport8.png' %}"></div>
-           <div></div>
-
-           <div></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport3.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport2.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport9.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport10.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport1.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport7.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport11.png' %}"></div>
-           <div></div>
-
-           <div></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport5.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport8.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport9.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport11.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport12.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/sport7.png' %}"></div>
-           <div class="paper-first-col not-active">24</div>
-           <div></div>
-
-           <div></div>
-           <div class="paper-first-col not-active">25</div>
-           <div class="paper-first-col not-active">26</div>
-           <div class="paper-first-col not-active">27</div>
-           <div class="paper-first-col not-active">28</div>
-           <div class="paper-first-col not-active">29</div>
-           <div class="paper-first-col not-active">30</div>
-           <div class="paper-first-col not-active">31</div>
-           <div></div>
-       </div>
+    <div class="wrapper">
+        <div></div>
+        {% for day_of_week, values in activities.items %}
+            <div class="col paper-first-col">
+                {% for val in values %}
+                    <div class="day">
+                        {% if val.date %}
+                            <div class="modal-container">
+                                {% if val.type_of_activity == 'Спортивная ходьба' %} <img src="{% static 'main/img/sport1.png' %}" class="myBtn">
+                                {% elif val.type_of_activity == 'Баскетбол' %} <img src="{% static 'main/img/sport11.png' %}" class="myBtn">
+                                {% elif val.type_of_activity == 'Йога' %} <img src="{% static 'main/img/sport12.png' %}" class="myBtn">
+                                {% elif val.type_of_activity == 'Бокс' %} <img src="{% static 'main/img/sport2.png' %}" class="myBtn">
+                                {% elif val.type_of_activity == 'Кардио-тренировка' %} <img src="{% static 'main/img/sport8.png' %}" class="myBtn">
+                                {% elif val.type_of_activity == 'Силовая тренировка' %} <img src="{% static 'main/img/sport7.png' %}" class="myBtn">
+                                {% elif val.type_of_activity == 'Теннис' %} <img src="{% static 'main/img/sport5.png' %}" class="myBtn">
+                                {% elif val.type_of_activity == 'Бег' %} <img src="{% static 'main/img/sport9.png' %}" class="myBtn">
+                                {% elif val.type_of_activity == 'Футбол' %} <img src="{% static 'main/img/sport10.png' %}" class="myBtn">
+                                {% else %} val.type_of_activity {% endif %}
+                                 <div class="modal" id="myModal{{ forloop.counter }}">
+                                     <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                          <p class="statistic-small-text" style="font-size: 35px; font-family: 'Avenir middle';">{{ val.type_of_activity }}</p>
+                                         {% if val.average_pulse %}
+                                            <p class="statistic-small-text" style="font-size: 30px;"><mark>Средний пульс:</mark> {{ val.average_pulse }}</p>
+                                         {% endif %}
+                                         <p class="statistic-small-text" style="font-size: 30px;"><mark>Продолжительность:</mark> {{ val.duration }} минут</p>
+                                         <p class="statistic-small-text" style="font-size: 30px;"><mark>Интенсивность:</mark> {{ val.intensity }}</p>
+                                         <p class="statistic-small-text" style="font-size: 30px;"><mark>Дата:</mark> {{ val.date }}</p>
+                                         {% if val.content %}
+                                            <p class="statistic-small-text" style="font-size: 30px;"><mark>Описание:</mark> {{ val.content }}</p>
+                                         {% endif %}
+                                         {% if val.state_after %}
+                                            <p class="statistic-small-text" style="font-size: 30px;"><mark>Самочувствие после тренировки:</mark> {{ val.state_after }}</p>
+                                         {% endif %}
+                                     </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            {% if val == '-' %}
+                                <div class="paper-first-col not-active" style="border: none; color: white;">{{ val }}</div>
+                            {% else %}
+                                <div class="paper-first-col not-active" style="border: none; padding-top: 0px;">{{ val }}</div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <div></div>
     </div>
 
+    <script>
+        document.addEventListener('click', function (event) {
+            if (event.target.classList.contains('myBtn')) {
+                var modal = event.target.nextElementSibling;
+                modal.style.display = "block";
+            } else if (event.target.classList.contains('close')) {
+                var modal = event.target.closest('.modal');
+                modal.style.display = "none";
+            }
+        });
 
-     <script src="{% static 'main/js/mood.js' %}"></script>
+    </script>
+
+     <br><br><br>
+
+            <hr>
+
+            <div class="additional-content pink" style="margin-top: 50px; background-color: #F7DAAE;" id="pink-section">
+                <p class="boild-text">Статистика</p>
+                <p class="statistic-small-text">Средний пульс: {{ average_pulse_month }}</p>
+                <p class="statistic-small-text">Средняя продолжительность: {{ average_duration }} минут</p>
+            </div>
+
+            <hr>
+
+            <div class="additional-content" style="margin-top: 50px; margin-right: 50px;">
+                <p class="boild-text" style="margin-bottom: 60px;">Рекомендации, основанные на статистике:</p>
+
+                    <div class="row" style="margin-bottom: 50px;">
+                        <div class="col-sm-3">
+                            <img src="{% static 'main/img/sport/4.jpg' %}" style="height: 300px;" class="rounded-circle">
+                        </div>
+                        <div class="col">
+                            <p class="name">
+                                1. Разнообразьте тренировки
+                                <p class="statistic-small-text">
+                                    Чтобы получить максимальную пользу от занятий спортом, необходимо разнообразить тренировки. Не занимайтесь только одним видом спорта, а попробуйте разные виды. Например, можно чередовать бег с плаванием или йогу с танцами.
+                                </p>
+                            </p>
+                            <p class="name">
+                                2. Не забывайте про разминку и растяжку
+                                <p class="statistic-small-text">
+                                    Перед началом занятий спортом необходимо провести разминку, чтобы разогреть мышцы и суставы. После тренировки не забывайте про растяжку, чтобы избежать мышечных болей и травм.
+                                </p>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 50px;">
+                        <div class="col">
+                            <p class="name">
+                                3. Отдыхайте
+                                <p class="statistic-small-text">
+                                    Не забывайте про отдых. Организм нуждается во времени для восстановления после тренировок. Поэтому не занимайтесь спортом каждый день, а дайте организму время для отдыха.
+                                </p>
+                            </p>
+                            <p class="name">
+                                4. Время на себя
+                                <p class="statistic-small-text">
+                                    Чтобы наши ресурсы не истощались, не происходило эмоциональное выгорание и были силы на новые свершения, в том числе и занятия своей физической формой, нам необходимо уделять личное время себе. Достаточно всего 30 мин в день это называется «теория получаса».
+                                </p>
+                            </p>
+                        </div>
+                        <div class="col-sm-3">
+                            <img src="{% static 'main/img/sport/2.jpg' %}" style="height: 300px;" class="rounded-circle">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="{% static 'main/img/sport/3.jpg' %}" style="height: 300px;" class="rounded-circle">
+                        </div>
+                        <div class="col">
+                            <p class="name">
+                                5. Питание
+                                <p class="statistic-small-text">
+                                    Оно должно быть системным и отвечать целям ваших тренировок. Три приёма пищи должны быть обязательными: завтрак, обед и ужин, а вот калорийность зависит от того, чего вы хотите достичь.
+                                    Если вы худеете, то пища должна быть менее калорийна, а если набираете мышечную массу, в еде должно быть больше белка и углеводов.
+                                    Вне зависимости от того, набираете ли вы массу или худеете, питание должно быть правильным: фастфуд и прочие подростковые радости вроде чипсов или шоколадок должны быть исключены. Пища должна быть хорошо усваиваемой.
+
+
+                                </p>
+                                <p class="statistic-small-text">
+                                    Важно добавить то, что питаться всё равно нужно, даже если вы худеете. Голод вызывает сильный стресс для организма, к тому же для интенсивной физической активности нужны калории. Идеальное время для приёма пищи — за два часа перед тренировкой. А ещё обязательно нужно пить много чистой воды — в день 1,5–2 литра.
+                                </p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+
 
 {% endblock %}

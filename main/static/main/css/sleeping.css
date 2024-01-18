@@ -17,7 +17,7 @@ p {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
 
-    column-gap: 10px;
+    column-gap: 40px;
 
     color: #261D1D;
     font-size: 18px;
@@ -35,7 +35,7 @@ p {
     border: 2px var(--2, #212353) solid;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 40px;
 
     text-align: center;
     padding-right: 20px; padding-left: 20px;
@@ -44,27 +44,44 @@ p {
 
 }
 
+.wrapper .dayOfWeek:hover{
+    border: 2px var(--3, #9C69E2) solid;
+    box-shadow: 10px 5px 5px var(--3, #9C69E2);
+}
+
+img:hover{
+    /*border-bottom: 2px rgb(240, 99, 184, 0.5) solid;*/
+    /*box-shadow-bottom: 10px 5px 5px rgb(240, 99, 184, 0.3);*/
+    box-shadow: var(--3, #9C69E2) 0px 25px 20px -20px;
+}
+
+
 
 .paper-first-col{
     height: 100%;
-    margin-top: 30px;
+    margin-top: 10px;
 
     text-align: center;
 
+    /*border-right: 3px dotted var(--2, #212353);*/
+    /*border-left: 3px dashed var(--2, #212353);*/
+
 }
+
 
 img {
    height: 80px;
-   margin-top: 30px;
+   margin-top: 10px;
    paddint-right: 10px;
 }
 
 
 
 .not-active{
-    font-size: 58px;
+    font-size: 56px;
     color: var(--2, #212353);
     padding-right: 10px;
+    opacity: 0.70;
 }
 
 .previous-month {
@@ -83,7 +100,7 @@ img {
   top: 0;
   width: 100%; /* Полная ширина */
   height: 100%; /* Полная высота */
-  overflow: auto; /* Включите прокрутку, если это необходимо */
+  overflow: auto;
   background-color: rgb(0,0,0); /* Цвет запасной вариант */
   background-color: rgba(0,0,0,0.4); /* Черный с непрозрачностью */
 }
@@ -94,16 +111,17 @@ img {
   margin: 15% auto; /* 15% сверху и по центру */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Может быть больше или меньше, в зависимости от размера экрана */
+  width: 60%; /* Может быть больше или меньше, в зависимости от размера экрана */
 }
 
 
 /* Кнопка закрытия */
 .close {
-  color: #aaa;
+  color: var(--3, #9C69E2);
   float: right;
-  font-size: 28px;
+  font-size: 40px;
   font-weight: bold;
+  padding-left: 800px;
 }
 
 .close:hover,
@@ -114,3 +132,42 @@ img {
 }
 
 
+.additional-content {
+    margin-top: 30px;
+    margin-bottom: 40px;
+    padding-left: 150px;
+
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.statistic-small-text{
+    color: var(--1, #4B5D68);
+    font-family: 'Avenir reg';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%; /* 28.8px */
+    margin-right: 30px;
+}
+
+.boild-text {
+    color: #212353;
+    font-family: Helvetica;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%; /* 52px */
+
+    margin-top: 30px;
+}
+
+
+#pink-section{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+body {
+    overflow-x: hidden;
+}

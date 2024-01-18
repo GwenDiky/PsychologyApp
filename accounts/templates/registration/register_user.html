@@ -24,15 +24,35 @@
     {% endfor %}
   </li>
 </ul>
-<div class='container'>
-  <div class='row' style='width: 100%;'>
-      <form action="{% url 'accounts:register_user' %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Зарегистрироваться" class='start-button'>
-        <br><br>
-      </form>
-    </div>
+<div class='container' style='font-size: 18px; font-family: "Avenir reg";'>
+      <div class='main sing-up'>
+          <div class='row' style='width: 70%; font-size: 18px; font-family: "Avenir reg";'>
+              <div class="col-lg-4"></div>
+              <div class="col-lg-8">
+              <form action="{% url 'accounts:register_user' %}" method="POST" style='width: 100%; font-size: 18px; font-family: "Avenir reg";'>
+                {% csrf_token %}
+<!--                {{ form.as_p }}-->
+                   <div class='welcome-container'>
+                      <br><br>
+                      <h4 style="font-family: Avenir;">Регистрация</h4>
+                    <p class='welcome-message'>Добро пожаловать!</p>
+                  </div>
+                  <div style="padding-bottom: 20px;">
+                        <input type="text" class="form-control" aria-describedby="emailHelp" name="username" placeholder='Логин'>
+                  </div>
+                  <div style="padding-bottom: 20px;">
+                        <input type="text" class="form-control" name="password1" placeholder='Пароль'>
+                  </div>
+                  <div style="padding-bottom: 20px;">
+                        <input type="password" class="form-control" name="password2" placeholder='Подтвердите пароль'>
+                  </div>
+
+                <input type="submit" value="Зарегистрироваться" class='purple-button'>
+                <br><br>
+              </form>
+          </div>
+              </div>
+          </div>
 </div>
 
 {% endblock %}

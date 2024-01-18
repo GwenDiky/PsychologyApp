@@ -106,7 +106,7 @@
     box-shadow: 5px 2px 5px 2px #a0a0a0;
     border-radius: 10px;
 
-    height: 100px;
+    height: 140px;
 
 }
 
@@ -147,3 +147,18 @@ p{
 .space-between-rows {
     margin-top: 60px;
 }
+
+a {
+    text-decoration: none;
+
+    color: var(--1, #4B5D68);
+    font-family: 'Avenir middle';
+}
+
+a:hover {
+    text-decoration: none;
+
+    color: var(--1, #4B5D68);
+    font-family: 'Avenir middle';
+}
+

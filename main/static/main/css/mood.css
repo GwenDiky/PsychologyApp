@@ -59,7 +59,18 @@ p {
 }
 
 img {
-   height: 40%;
+   height: 80px;
+}
+
+img:hover{
+    /*border-bottom: 2px rgb(240, 99, 184, 0.5) solid;*/
+    /*box-shadow-bottom: 10px 5px 5px rgb(240, 99, 184, 0.3);*/
+    box-shadow: #FFCF48 0px 25px 20px -20px;
+}
+
+.wrapper .dayOfWeek:hover{
+    border: 2px #FFCF48 solid;
+    box-shadow: none;
 }
 
 

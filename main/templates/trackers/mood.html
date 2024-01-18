@@ -6,30 +6,30 @@
 {% endblock %}
 
 {% block extra_head_links %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/sleeping.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/mainpage.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/mood.css' %}">
 {% endblock %}
 
 {% block content %}
 
-    <!-- Модальный -->
-    <div id="myModal" class="modal">
-
-      <!-- Модальное содержание -->
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Некоторый текст в модальном..</p>
-      </div>
-
-    </div>
-
-    <div class="colourful-section">
-        <div class="container" id="first-section">
-            <div class="row">
-                <p>Декабрь 2023</p>
+<div class="additional-content">
+        <div class="row">
+            <div class="col-sm-4">
+                <p>Декабрь, 2023</p>
+            </div>
+            <div class="col">
+                <a href="{% url 'main:mood-editor' %}">
+                      <button class="purple-button" style="margin-top: 20px; background-color: #FFDB58;">
+                          <span class="add">Добавить запись</span>
+                      </button>
+                </a>
             </div>
         </div>
+    </div>
 
-       <div class="wrapper">
+
+        <div class="wrapper">
            <div></div>
            <div class="dayOfWeek">Понедельник</div>
            <div class="dayOfWeek">Вторник</div>
@@ -39,62 +39,154 @@
            <div class="dayOfWeek">Суббота</div>
            <div class="dayOfWeek">Воскресенье</div>
            <div></div>
+        </div>
 
-           <div></div>
-           <div class="paper-first-col not-active previous-month">28</div>
-           <div class="paper-first-col not-active previous-month">29</div>
-           <div class="paper-first-col not-active previous-month">30</div>
-           <div class="paper-first-col not-active previous-month">31</div>
-           <div class="paper-first-col" id="myBtn">
-               <img src="{% static 'main/img/mood1.png' %}">
-           </div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood26.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood3.png' %}"></div>
-           <div></div>
+    <div class="wrapper">
+        <div></div>
+        {% for day_of_week, values in moods.items %}
+            <div class="col paper-first-col">
+                {% for val in values %}
+                    <div class="day">
+                        {% if val.date %}
+                            <div class="modal-container">
+                                {% if val.title == 'Агрессивный' %} <img src="{% static 'main/img/mood27.png' %}" class="myBtn">
+                                {% elif val.title == 'Злой' %} <img src="{% static 'main/img/mood4.png' %}" class="myBtn">
+                                {% elif val.title == 'Нейтральный' %} <img src="{% static 'main/img/mood3.png' %}" class="myBtn">
+                                {% elif val.title == 'Игривый' %} <img src="{% static 'main/img/mood1.png' %}" class="myBtn">
+                                {% elif val.title == 'Недовольный' %} <img src="{% static 'main/img/mood26.png' %}" class="myBtn">
+                                {% elif val.title == 'Довольный' %} <img src="{% static 'main/img/mood15.png' %}" class="myBtn">
+                                {% elif val.title == 'Очень довольный' %} <img src="{% static 'main/img/mood5.png' %}" class="myBtn">
+                                {% elif val.title == 'Кокетливый' %} <img src="{% static 'main/img/mood12.png' %}" class="myBtn">
+                                {% elif val.title == 'Грустный' %} <img src="{% static 'main/img/mood13.png' %}" class="myBtn">
+                                {% elif val.title == 'Очень грустный' %} <img src="{% static 'main/img/mood25.png' %}" class="myBtn">
+                                {% elif val.title == 'Ошарашенный' %} <img src="{% static 'main/img/mood20.png' %}" class="myBtn">
+                                {% elif val.title == 'В смятении' %} <img src="{% static 'main/img/mood28.png' %}" class="myBtn">
+                                {% elif val.title == 'В шоке' %} <img src="{% static 'main/img/mood7.png' %}" class="myBtn">
+                                {% elif val.title == 'Радостный' %} <img src="{% static 'main/img/mood14.png' %}" class="myBtn">
+                                {% else %} val.title {% endif %}
+                                 <div class="modal" id="myModal{{ forloop.counter }}">
+                                     <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                         <p class="statistic-small-text" style="font-size: 35px; font-family: 'Avenir middle';">{{ val.title }}</p>
+                                         <p class="statistic-small-text" style="font-size: 30px;"><mark>Глубина эмоции:</mark> {{ val.effort }}</p>
+                                         <p class="statistic-small-text" style="font-size: 30px;"><mark>Дата:</mark> {{ val.date }}</p>
+                                         {% if val.reason %}
+                                            <p class="statistic-small-text" style="font-size: 30px;"><mark>Обстоятельства:</mark> {{ val.reason }}</p>
+                                         {% endif %}
 
-           <div></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood4.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood5.png' %}"></div>
-           <div class="paper-first-col not-active">6</div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood26.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood27.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood9.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood10.png' %}"></div>
-           <div></div>
+                                          <a href="{% url 'main:mood-edit' val.id %}">
+                                              <button class="purple-button" style="margin-top: 20px; background-color: #FFDB58;">
+                                                  <span class="add">Редактировать</span>
+                                              </button>
+                                          </a>
 
-           <div></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood25.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood12.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood13.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood14.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood15.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood28.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood24.png' %}"></div>
-           <div></div>
 
-           <div></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood18.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood19.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood27.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood21.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood26.png' %}"></div>
-           <div class="paper-first-col"><img src="{% static 'main/img/mood25.png' %}"></div>
-           <div class="paper-first-col not-active">24</div>
-           <div></div>
+                                         <a href="{% url 'main:mood-delete' val.id %}">
+                                              <button class="purple-button" style="margin-top: 20px; background-color: #FFDB58;">
+                                                  <span class="add">Удалить</span>
+                                              </button>
+                                          </a>
 
-           <div></div>
-           <div class="paper-first-col not-active">25</div>
-           <div class="paper-first-col not-active">26</div>
-           <div class="paper-first-col not-active">27</div>
-           <div class="paper-first-col not-active">28</div>
-           <div class="paper-first-col not-active">29</div>
-           <div class="paper-first-col not-active">30</div>
-           <div class="paper-first-col not-active">31</div>
-           <div></div>
-       </div>
+                                     </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            {% if val == '-' %}
+                                <div class="paper-first-col not-active" style="border: none; color: white;">{{ val }}</div>
+                            {% else %}
+                                <div class="paper-first-col not-active" style="border: none; padding-top: 0px;">{{ val }}</div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <div></div>
+    </div>
+
+    <script>
+        document.addEventListener('click', function (event) {
+            if (event.target.classList.contains('myBtn')) {
+                var modal = event.target.nextElementSibling;
+                modal.style.display = "block";
+            } else if (event.target.classList.contains('close')) {
+                var modal = event.target.closest('.modal');
+                modal.style.display = "none";
+            }
+        });
+
+    </script>
+
+    <br><br>
+
+    <hr>
+
+    <div class="additional-content pink" style="margin-top: 50px; background-color: #7479D8; color: white;" id="pink-section">
+                <p class="boild-text" style="color: white;">Статистика</p>
+                <p class="statistic-small-text" style="color: white;">Средний уровень эмоциональности: {{ average_effort }}/10;</p>
+                <p class="statistic-small-text" style="color: white;">Самое частое эмоциональное состояние: {{ the_most_common_emotion }};</p>
     </div>
 
 
-     <script src="{% static 'main/js/mood.js' %}"></script>
+
+            <hr>
+
+            <div class="additional-content" style="margin-top: 50px; margin-right: 50px;">
+                <p class="boild-text" style="margin-bottom: 60px;">Рекомендации, основанные на статистике:</p>
+
+                    <div class="row" style="margin-bottom: 50px;">
+                        <div class="col-sm-3">
+                            <img src="{% static 'main/img/emotion/1.jpg' %}" style="height: 300px;" class="rounded-circle">
+                        </div>
+                        <div class="col">
+                            <p class="name">
+                                1. Физические упражнения
+                                <p class="statistic-small-text">
+                                    Занятия спортом являются одним из лучших инструментов по развитию силы воли и самоконтроля. Часто можно встретить людей, которые вымещают свои негативные эмоции на боксерской груше, занимаются йогой, танцами или аэробикой. Спорт помогает улучшить не только физическое состояние, но и психологическое. Даже утренняя зарядка наполнит вас энергией и хорошим настроением.
+                                </p>
+                            </p>
+                            <p class="name">
+                                2. Самовнушение
+                                <p class="statistic-small-text">
+                                   Порой нас одолевает сильный гнев, в этот момент тяжело быстро успокоиться и прийти в себя. Попробуйте посмотреть на проблему с другой стороны. Подумайте, что эта ситуация — очередной опыт в жизни, который просто нужно пережить. Эмоциональные всплески делают нас сильнее и выносливее, поэтому ко всему нужно относиться по-философски. В первое время будет сложно контролировать свои эмоции, поэтому напоминайте себе, что вы таким способом формируете в себе внутренний стержень.
+                                </p>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 50px;">
+                        <div class="col">
+                            <p class="name">
+                                3. Пауза
+                                <p class="statistic-small-text">
+                                    Иногда сложно сразу полностью успокоиться, сказав себе «стоп, хватит нервничать». Основная задача эмоционального интеллекта — уметь затормозить, сделать паузу. В этот момент нужно включить мозг и подумать о том, что произошло, почему вы реагируете так. Затем примите решение, как лучше поступить в этой ситуации, и только потом начинайте действовать.
+                                </p>
+                            </p>
+                            <p class="name">
+                                4. Упражнения на дыхание
+                                <p class="statistic-small-text">
+                                    Наверняка вы уже слышали советы про глубокое дыхание во время всплеска эмоций. Это действительно работает. Дыхание помогает расслабиться, отвлечься от ситуации и прийти в себя. Достаточно просто глубоко дышать на протяжении нескольких минут, чтобы почувствовать внутреннее облегчение
+                                </p>
+                            </p>
+                        </div>
+                        <div class="col-sm-3">
+                            <img src="{% static 'main/img/emotion/2.jpg' %}" style="height: 300px;" class="rounded-circle">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="{% static 'main/img/emotion/3.jpg' %}" style="height: 300px;" class="rounded-circle">
+                        </div>
+                        <div class="col">
+                            <p class="name">
+                                5. Отстранение от происходящего
+                                <p class="statistic-small-text">
+                                    Негативные эмоции в большинстве случаев возникают в тот момент, когда другой человек вымещает на вас свое недовольство, зло, плохое настроение или обиду. Нам автоматически хочется ответить тем же, защититься от потока негатива. Но такое действие может только усугубить ситуацию. В этот момент лучше не реагировать на эмоциональные проявления человека, пропустить мимо себя неприятные слова и не дать эмоциям взять вверх над вами. Отвлекитесь на что-то, уйдите в другое место. Дайте человеку остыть и попробуйте опять начать разговор.
+                                </p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
 
 {% endblock %}

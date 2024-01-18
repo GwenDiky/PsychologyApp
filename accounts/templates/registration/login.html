@@ -15,16 +15,17 @@
 {% block content %}
 <div class='container'>
   <div class='main sing-up'>
-    <div class='col-sm-4'></div>
-    <div class='col-lg-4'>
+      <div class="col-lg-2"></div>
+    <div class='col-lg'>
       <div class='welcome-container1'></div>
           <div class='welcome-container'>
+              <br><br>
+              <h4 style="font-family: Avenir;">Авторизация</h4>
             <p class='welcome-message'>Добро пожаловать!</p>
           </div>
           <form action = "" method='POST' id="sign-in">
             {% csrf_token %}
-            <br><br>
-              <div>
+              <div style="padding-top: 0px;">
                 <input type="text" class="form-control" aria-describedby="emailHelp" name="username" placeholder='Логин'>
               </div>
               <div class="mb-3">
@@ -32,40 +33,23 @@
                 <input type="password" class="form-control" name="password" placeholder='Пароль'>
               </div>
 
-              <p style='margin-right: 20px;н'>Забыли логин/пароль?</p><br>
 
               <div class='login-button-container'>
-                <button type="submit" class="login-button">Войти</button>
+                <button type="submit" class="purple-button">Войти</button>
               </div>
 
 
-            <i class="fa-brands fa-facebook"></i>
-            <i class="fa-brands fa-square-facebook"></i>
-            <i class="fa-brands fa-facebook-f"></i>
 
-
-            <!--<div class="sliding-board">
-            <div class="wide-borad">
-              <div class="board sing-in">
-                <h1>Добро пожаловать!</h1>
-                <p style="color: white;">
-                  Чтобы оставаться на связи с нами, пожалуйста, войдите, используя свои личные данные.
-                </p>
-                <button class="login-button">Войти</button>
-              </div>
-            </div>
-          </div>-->
 
 
             </form>
             <div class='registration-section'>
               <p class='registration-info'>Нет аккаунта?</p>
-              <p class='register-link'><a href="{% url 'accounts:register_user' %}">Зарегистрироваться</a></p><br>
+                <p class='register-link'><a href="{% url 'accounts:register_user' %}" style="font-size: 20px;"><u>Зарегистрироваться</u></a></p><br>
             </div>
         </div>
+            <div class="col-lg-2"></div>
     </div>
-      </div>
-      <div class='col-sm-4'></div>
     </div>
     <br><br>
 </div>

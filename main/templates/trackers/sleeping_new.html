@@ -1,4 +1,4 @@
-{% extends 'layout/base.html'%}
+{% extends 'layout/base.html' %}
 {% load main_tags %}
 {% load static %}
 
@@ -8,13 +8,25 @@
 
 {% block extra_head_links %}
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/sleeping.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/mainpage.css' %}">
 {% endblock %}
 
 {% block content %}
 
-        <div class="container" style="margin-top: 30px;">
-            <p>Месяц: Декабрь</p>
+    <div class="additional-content">
+        <div class="row">
+            <div class="col-sm-4">
+                <p>Декабрь, 2023</p>
+            </div>
+            <div class="col">
+                <a href="{% url 'main:sleep-editor' %}">
+                      <button class="purple-button" style="margin-top: 20px;">
+                          <span class="add">Добавить запись</span>
+                      </button>
+                </a>
+            </div>
         </div>
+    </div>
 
         <div class="wrapper">
            <div></div>
@@ -28,47 +40,133 @@
            <div></div>
         </div>
 
-            <div class="wrapper">
-                <div></div>
-                {% for day_of_week, values in sleeping.items %}
-                    <div class="col paper-first-col">
-                        {% for val in values %}
-                            <div class="day">
-                                {% if val.date %}
-                                    {% if val.duration == 1 %} <img src="{% static 'main/img/1.png' %}">
-                                    {% elif val.duration == 2 %} <img src="{% static 'main/img/2.png' %}">
-                                    {% elif val.duration == 3 %} <img src="{% static 'main/img/3.png' %}">
-                                    {% elif val.duration == 4 %} <img src="{% static 'main/img/4.png' %}">
-                                    {% elif val.duration == 5 %} <img src="{% static 'main/img/5.png' %}">
-                                    {% elif val.duration == 6 %} <img src="{% static 'main/img/6.png' %}">
-                                    {% elif val.duration == 7 %} <img src="{% static 'main/img/7.png' %}">
-                                    {% elif val.duration == 8 %} <img src="{% static 'main/img/8.png' %}">
-                                    {% elif val.duration == 9 %} <img src="{% static 'main/img/9.png' %}">
-                                    {% else %} val.duration {% endif %}
-                                {% else %}
-                                    {% if val == '-' %}
-                                        <div class="paper-first-col not-active" style="border: none; color: white;">{{ val }}</div>
-                                    {% else %}
-                                        <div class="paper-first-col not-active" style="border: none; padding-top: 0px;">{{ val }}</div>
-                                    {% endif %}
-                                {% endif %}
+    <div class="wrapper">
+        <div></div>
+        {% for day_of_week, values in sleeping.items %}
+            <div class="col paper-first-col">
+                {% for val in values %}
+                    <div class="day">
+                        {% if val.date %}
+                            <div class="modal-container">
+                                {% if val.duration == 1 %} <img src="{% static 'main/img/1.png' %}" class="myBtn">
+                                {% elif val.duration == 2 %} <img src="{% static 'main/img/2.png' %}" class="myBtn">
+                                {% elif val.duration == 3 %} <img src="{% static 'main/img/3.png' %}" class="myBtn">
+                                {% elif val.duration == 4 %} <img src="{% static 'main/img/4.png' %}" class="myBtn">
+                                {% elif val.duration == 5 %} <img src="{% static 'main/img/5.png' %}" class="myBtn">
+                                {% elif val.duration == 6 %} <img src="{% static 'main/img/6.png' %}" class="myBtn">
+                                {% elif val.duration == 7 %} <img src="{% static 'main/img/7.png' %}" class="myBtn">
+                                {% elif val.duration == 8 %} <img src="{% static 'main/img/8.png' %}" class="myBtn">
+                                {% elif val.duration == 9 %} <img src="{% static 'main/img/9.png' %}" class="myBtn">
+                                {% else %} {{ val.duration }} {% endif %}
+                                 <div class="modal" id="myModal{{ forloop.counter }}">
+                                     <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                         <p class="statistic-small-text" style="font-size: 30px;"><mark>Качество сна:</mark> {{ val.quality }}</p>
+                                         <p class="statistic-small-text" style="font-size: 30px;"><mark>Дата:</mark> {{ val.date }}</p>
+                                         {% if val.content %}
+                                            <p class="statistic-small-text" style="font-size: 30px;"><mark>Описание:</mark> {{ val.content }}</p>
+                                         {% endif %}
+                                     </div>
+                                </div>
                             </div>
-                        {% endfor %}
+                        {% else %}
+                            {% if val == '-' %}
+                                <div class="paper-first-col not-active" style="border: none; color: white;">{{ val }}</div>
+                            {% else %}
+                                <div class="paper-first-col not-active" style="border: none; padding-top: 0px;">{{ val }}</div>
+                            {% endif %}
+                        {% endif %}
                     </div>
                 {% endfor %}
-                <div></div>
+            </div>
+        {% endfor %}
+        <div></div>
+    </div>
+
+    <script>
+        document.addEventListener('click', function (event) {
+            if (event.target.classList.contains('myBtn')) {
+                var modal = event.target.nextElementSibling;
+                modal.style.display = "block";
+            } else if (event.target.classList.contains('close')) {
+                var modal = event.target.closest('.modal');
+                modal.style.display = "none";
+            }
+        });
+
+    </script>
+
+     <br><br><br>
+
+            <hr>
+
+            <div class="additional-content pink" style="margin-top: 50px;" id="pink-section">
+                <p class="boild-text">Статистика</p>
+                <p class="statistic-small-text">Средняя продолжительность сна: {{ average_slumber }} часов </p>
+                <p class="statistic-small-text">Среднее качество сна: {{ average_quality }}/5</p>
             </div>
 
-            <br><br><br>
+            <hr>
 
-            <div class="container">
-                <p>Статистика</p>
-                <p style="font-size: 20px;">Средняя продолжительность сна: {{ average_slumber }}</p>
-                <p style="font-size: 20px;">Среднее качество сна: {{ average_quality }}</p>
+            <div class="additional-content" style="margin-top: 50px; margin-right: 50px;">
+                <p class="boild-text" style="margin-bottom: 60px;">Рекомендации, основанные на статистике:</p>
 
-                <p>Рекомендации:</p>
+                    <div class="row" style="margin-bottom: 50px;">
+                        <div class="col-sm-3">
+                            <img src="{% static 'main/img/sleeping/1.jpg' %}" style="height: 300px;" class="rounded-circle">
+                        </div>
+                        <div class="col">
+                            <p class="name">
+                                1. Устраивайте перерывы на сон, если чувствуете усталость
+                                <p class="statistic-small-text">
+                                    Немного вздремнув, вы снова обретёте бодрость. Однако учитывайте, что послеобеденный сон не должен длиться дольше 45 минут.
+                                </p>
+                            </p>
+                            <p class="name">
+                                2. Ложитесь спать и просыпайтесь в одно и то же время
+                                <p class="statistic-small-text">
+                                    Многие из нас по выходным дают себе поблажки и спят чуть ли не до самого обеда. Однако учёные считают, что из-за такого непостоянства сбиваются наши циркадные ритмы. Улучшить сон поможет ежедневный подъём и отход ко сну в одно и то же время.
+                                </p>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 50px;">
+                        <div class="col">
+                            <p class="name">
+                                3. Сократите употребление кофеина
+                                <p class="statistic-small-text">
+                                    По рекомендациям Всемирного общества сна как минимум за шесть часов до отхода ко сну необходимо перестать употреблять кофеин. Имейте в виду, что он содержится не только в кофе, но также в чае, газированных напитках и даже шоколаде.
+                                </p>
+                            </p>
+                            <p class="name">
+                                4. Проветривайте спальню
+                                <p class="statistic-small-text">
+                                    В ходе недавно проведённого исследования выяснилось, что при открытом окне качество сна улучшается. Если же у вас есть кондиционер, то подберите температуру, наиболее подходящую для сна. Она должна быть на несколько градусов ниже обычной.
+                                </p>
+                            </p>
+                        </div>
+                        <div class="col-sm-3">
+                            <img src="{% static 'main/img/sleeping/2.jpg' %}" style="height: 300px;" class="rounded-circle">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="{% static 'main/img/sleeping/3.jpg' %}" style="height: 300px;" class="rounded-circle">
+                        </div>
+                        <div class="col">
+                            <p class="name">
+                                5. Не занимайтесь на кровати посторонними делами
+                                <p class="statistic-small-text">
+                                    С помощью смартфона или ноутбука мы легко можем отвечать на имейлы, лёжа на кровати. Однако это может привести к тому, что вы будете ассоциировать это место с работой. Перестаньте так делать. Постель предназначена для сна.
+                                </p>
+                                <p class="statistic-small-text">
+                                    Соблюдая эти правила, вы улучшите качество сна, а также предотвратите его фрагментацию и недосып. Последний может привести к серьёзным проблемам со здоровьем, включая психические расстройства и сердечно-сосудистые заболевания.
+                                </p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-            </div>
 
 
 

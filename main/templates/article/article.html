@@ -30,8 +30,10 @@
                 <p class="light-text">{{ article.time_for_read }} минут</p>
             </div>
             <div class="col">
-                <p class="bold-text">Авторы:</p>
-                <p class="light-text">{{ article.author }}</p>
+                {% if article.author %}
+                    <p class="bold-text">Авторы:</p>
+                    <p class="light-text">{{ article.author }}</p>
+                {% endif %}
             </div>
         </div>
         <div class="row" style="margin-top: 50px;">

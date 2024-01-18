@@ -1,10 +1,10 @@
-import io
-
-from rest_framework import serializers
-from rest_framework.parsers import JSONParser
-from rest_framework.renderers import JSONRenderer
-from .models import Mood
-
+# import io
+#
+# from rest_framework import serializers
+# from rest_framework.parsers import JSONParser
+# from rest_framework.renderers import JSONRenderer
+# from .models import Mood
+#
 
 # class MoodModel:
 #     def __init__(self, title):
@@ -21,10 +21,10 @@ from .models import Mood
 #         instance.save()
 #         return instance
 
-class MoodSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Mood
-        fields = "__all__"
+# class MoodSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Mood
+#         fields = "__all__"
 
 # def encode():
 #     model = MoodModel("Воодушевление")
