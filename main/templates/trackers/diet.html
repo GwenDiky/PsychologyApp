@@ -1,0 +1,193 @@
+{% extends 'layout/base.html'%}
+{% load static %}
+
+{% block title %}
+    Трекер воды
+{% endblock %}
+
+{% block extra_head_links %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/sleeping.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/mainpage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/mood.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/water.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/diet.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="additional-content">
+        <div class="row">
+            <div class="col-sm-4">
+                <p>Ноябрь, 2024</p>
+            </div>
+            <div class="col">
+                <a href="{% url 'main:mood-editor' %}">
+                      <button class="purple-button" style="margin-top: 20px; background-color: #98ff98;">
+                          <span class="add">Добавить запись</span>
+                      </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="wrapper">
+       <div></div>
+       <div class="dayOfWeek">Понедельник</div>
+       <div class="dayOfWeek">Вторник</div>
+       <div class="dayOfWeek">Среда</div>
+       <div class="dayOfWeek">Четверг</div>
+       <div class="dayOfWeek">Пятница</div>
+       <div class="dayOfWeek">Суббота</div>
+       <div class="dayOfWeek">Воскресенье</div>
+       <div></div>
+    </div>
+
+    <div class="wrapper">
+        <div></div>
+            {% for day_of_week, values in water.items %}
+            <div class="col paper-first-col">
+                {% for val in values %}
+                    <div class="day">
+                        {% if val.date %}
+                            <div class="modal-container">
+                                {% if val.count < 0.5 %} <img src="{% static 'main/img/water/empty_bottle.png' %}" class="myBtn">
+                                {% elif val.count <= 1.0 %} <img src="{% static 'main/img/water/1_bottle.png' %}" class="myBtn">
+                                {% elif val.count <= 1.5 %} <img src="{% static 'main/img/water/2_bottle.png' %}" class="myBtn">
+                                {% elif val.count < 2.0 %} <img src="{% static 'main/img/water/3_bottle.png' %}" class="myBtn">
+                                {% elif val.count >= 2.0 %} <img src="{% static 'main/img/water/full_bottle.png' %}" class="myBtn">
+                                {% else %} val.count {% endif %}
+                                 <div class="modal" id="myModal{{ forloop.counter }}">
+                                     <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                         <p class="statistic-small-text" style="font-size: 35px; font-family: 'Avenir middle';">{{ val.count }} л.</p>
+                                         <p class="statistic-small-text" style="font-size: 30px;"><mark>Дата:</mark> {{ val.date }}</p>
+
+
+                                         <div class="row">
+                                             <div class="col">
+                                                  <a href="{% url 'main:mood-edit' val.id %}">
+                                                      <button class="purple-button" style="margin-top: 20px; background-color: #92e6fd;">
+                                                          <span class="add">Редактировать</span>
+                                                      </button>
+                                                  </a>
+                                             </div>
+                                             <div class="col">
+                                                 <a href="{% url 'main:mood-delete' val.id %}">
+                                                      <button class="purple-button" style="margin-top: 20px; background-color: #92e6fd;">
+                                                          <span class="add">Удалить</span>
+                                                      </button>
+                                                  </a>
+                                             </div>
+                                        </div>
+                                     </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            {% if val == '-' %}
+                                <div class="paper-first-col not-active" style="border: none; color: white;">{{ val }}</div>
+                            {% else %}
+                                <div class="paper-first-col not-active" style="border: none; padding-top: 0px;">{{ val }}</div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <div></div>
+    </div>
+
+    <script>
+        document.addEventListener('click', function (event) {
+            if (event.target.classList.contains('myBtn')) {
+                var modal = event.target.nextElementSibling;
+                modal.style.display = "block";
+            } else if (event.target.classList.contains('close')) {
+                var modal = event.target.closest('.modal');
+                modal.style.display = "none";
+            }
+        });
+
+    </script>
+
+    <br><br>
+<img src="{% static 'main/img/food/chicken-leg.png' %}" class="myBtn">
+<img src="{% static 'main/img/food/diet.png' %}" class="myBtn">
+<img src="{% static 'main/img/food/fast-food.png' %}" class="myBtn">
+<img src="{% static 'main/img/food/fried-egg.png' %}" class="myBtn">
+<img src="{% static 'main/img/food/nuts.png' %}" class="myBtn">
+<img src="{% static 'main/img/food/pizza.png' %}" class="myBtn">
+<img src="{% static 'main/img/food/spaguetti.png' %}" class="myBtn">
+<img src="{% static 'main/img/food/steak.png' %}" class="myBtn">
+<img src="{% static 'main/img/food/toast.png' %}" class="myBtn">
+    <hr>
+
+
+    <div class="additional-content pink" style="margin-top: 50px; background-color: #98ff98; color: white;" id="pink-section">
+                <p class="boild-text" style="color: white;">Статистика</p>
+                <p class="statistic-small-text" style="color: white;">Среднее кол-во выпитой воды ежедневно: 1.8 литра;</p>
+    </div>
+
+
+                <hr>
+
+            <div class="additional-content" style="margin-top: 50px; margin-right: 50px;">
+                <p class="boild-text" style="margin-bottom: 60px;">Рекомендации, основанные на статистике:</p>
+
+                    <div class="row" style="margin-bottom: 50px;">
+                        <div class="col-sm-3">
+                            <img src="{% static 'main/img/diet/diet1.png' %}" style="height: 300px;" class="rounded-circle">
+                        </div>
+                        <div class="col">
+                            <p class="name">
+                                1. Регулярность питья воды
+                                <p class="statistic-small-text">
+                                    Один из лучших способов поддерживать водный баланс — пить воду регулярно в течение дня. Подобно тому, как занятия спортом улучшают самоконтроль, частое потребление воды помогает вашему телу поддерживать энергетический уровень, улучшает концентрацию и работу органов. Даже стакан воды сразу после пробуждения улучшит ваше самочувствие, добавит бодрости и настроит на продуктивный день.
+                                </p>
+                            </p>
+                            <p class="name">
+                                2. Сознательность питья
+                                <p class="statistic-small-text">
+                                   Порой, погружаясь в работу или бытовые задачи, мы забываем пить воду. Важно осознавать, что регулярное потребление жидкости — это вклад в долгосрочное здоровье. Старайтесь включить в сознание установку: «Моя гидратация влияет на общее состояние здоровья и энергичность». Небольшие напоминания или таймеры могут помочь выработать полезную привычку регулярно пить воду, а не только когда появляется жажда.
+                                </p>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 50px;">
+                        <div class="col">
+                            <p class="name">
+                                3. Пауза на воду
+                                <p class="statistic-small-text">
+                                    В течение дня делайте небольшие паузы для питья воды. Паузы не только помогут улучшить водный баланс, но и дадут возможность восстановить силы, отвлечься от рутины, немного расслабиться и снизить уровень стресса. Это может быть время, когда вы встаете из-за стола, потягиваетесь и выпиваете стакан воды.
+                                </p>
+                            </p>
+                            <p class="name">
+                                4. Глубокое питье воды
+                                <p class="statistic-small-text">
+                                    Подобно упражнениям на дыхание, осознанное и глубокое потребление воды может помочь вашему телу быстрее восстановиться после напряженного дня или физической активности. Пейте воду медленно и небольшими глотками. Это способствует лучшему усвоению воды организмом и помогает избежать перегрузки почек.
+                                </p>
+                            </p>
+                        </div>
+                        <div class="col-sm-3">
+                            <img src="{% static 'main/img/diet/diet2.png' %}" style="height: 300px;" class="rounded-circle">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="{% static 'main/img/diet/diet3.png' %}" style="height: 300px;" class="rounded-circle">
+                        </div>
+                        <div class="col">
+                            <p class="name">
+                                5. Правильная жидкость
+                                <p class="statistic-small-text">
+                                    Часто мы тянемся за кофе, сладкими напитками или энергетиками, когда на самом деле наше тело нуждается в простой воде. Научитесь распознавать эти сигналы и заменять привычку пить что-то сладкое на полезную альтернативу — воду. Это улучшит общее состояние организма, снизит риск обезвоживания и поможет избежать лишних калорий и сахара.
+                                </p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+{% endblock %}

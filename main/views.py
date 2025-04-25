@@ -1,5 +1,5 @@
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from datetime import datetime, timedelta
@@ -7,9 +7,13 @@ import calendar
 
 from rest_framework import generics
 
-from .forms import SelectFormArticles, GratitudeJournalForm, SlumberForm, PhysicalActivityForm, EmotionForm
-from .models import Article, RecordGratitudeJournal, Slumber, Emotion, PhysicalActivity
+from .forms import SelectFormArticles, GratitudeJournalForm, SlumberForm, PhysicalActivityForm, EmotionForm, \
+    MonthSelectForm
+from .models import (Article, RecordGratitudeJournal,
+                     Slumber, Emotion, PhysicalActivity,
+                     CircleOfLifeBalance, Water, MedicalIndications)
 from collections import Counter
+
 
 def home(request):
     return render(request, 'main/main.html', {})
@@ -71,6 +75,210 @@ class GratitudeJournalCreateView(CreateView):
     model = RecordGratitudeJournal
     form_class = GratitudeJournalForm
     success_url = reverse_lazy("main:diary")
+
+
+class DietList(ListView):
+    model = Water
+    context_object_name = "water"
+
+    def get_queryset(self):
+        form = MonthSelectForm(self.request.GET)
+        if form.is_valid():
+            current_month = form.cleaned_data['month']
+        else:
+            # Если форма не была отправлена или данные не верны, используем текущий месяц
+            current_month = datetime.today().month
+
+        query_set = (Water.objects.select_related("author")
+                     .filter(author=self.request.user,
+                             date__month=current_month))
+
+        d = {
+            'Monday': [],
+            'Tuesday': [],
+            'Wednesday': [],
+            'Thursday': [],
+            'Friday': [],
+            'Saturday': [],
+            'Sunday': []
+        }
+
+        # Определение первого дня месяца
+        first_day_of_month = datetime(datetime.today().year, current_month, 1)
+
+        # Определение последнего дня месяца
+        last_day_of_month = datetime(datetime.today().year, current_month % 12 + 1, 1) - timedelta(days=1)
+
+        # Заполнение данными из query_set
+        for day in query_set:
+            day_of_week = day.date.strftime('%A')
+            d[day_of_week].append(day)
+
+        numberOfDays = calendar.monthrange(datetime.today().year, current_month)[1]  # кол-во месяцев в текущем месяце
+        first_day_of_the_week = first_day_of_month.strftime('%A')
+
+        # определяем какие дни заняты
+        filed_out_days = []
+        for day in query_set:
+            filed_out_days.append(day.date.day)
+
+        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        current_index = days.index(first_day_of_the_week)
+        size = 7  # т.к. в неделе 7 дней
+
+        for i in range(1, numberOfDays + 1):  # итерация по каждому дню месяца
+            if i in filed_out_days:  # занята ли дата экземпляром Slumber
+                current_index += 1
+                if current_index == size:
+                    current_index = 0
+                continue
+            d[days[current_index]].append(i)  # Добавляет день  в список для дня недели
+            current_index += 1
+            if current_index == size:
+                current_index = 0
+
+        # Сортировка
+        for day_of_week, values in d.items():
+            def custom_sort(val):
+                if isinstance(val, Water):
+                    return val.date.day
+                return val
+
+            d[day_of_week].sort(key=custom_sort)
+
+        # Добавляем пропуски первым элементом списка, если день в месяце не первый. Добавляем до того момента, пока не найдем первый день
+        """
+        Итог:
+            1 2 3
+        6 7 8 9 10
+        """
+        if 1 not in d['Monday']:
+            d['Monday'].insert(0, '-')
+            if 1 not in d['Tuesday']:
+                d['Tuesday'].insert(0, '-')
+                if 1 not in d['Wednesday']:
+                    d['Wednesday'].insert(0, '-')
+                    if 1 not in d['Thursday']:
+                        d['Thursday'].insert(0, '-')
+                        if 1 not in d['Friday']:
+                            d['Friday'].insert(0, '-')
+                            if 1 not in d['Saturday']:
+                                d['Saturday'].insert(0, '-')
+                                if 1 not in d['Sunday']:
+                                    d['Sunday'].insert(0, '-')
+
+        if d['Sunday'][0] == "-":
+            for k in d.keys():
+                d[k].pop(0)
+
+        return d
+
+class HealthList(ListView):
+    model = MedicalIndications
+    context_object_name = 'health'
+
+    paginate_by = 10
+
+    def get_queryset(self):
+        return MedicalIndications.objects.filter(author=self.request.user)
+
+
+
+class WaterList(ListView):
+    model = Water
+    context_object_name = "water"
+
+    def get_queryset(self):
+        form = MonthSelectForm(self.request.GET)
+        if form.is_valid():
+            current_month = form.cleaned_data['month']
+        else:
+            # Если форма не была отправлена или данные не верны, используем текущий месяц
+            current_month = datetime.today().month
+
+        query_set = (Water.objects.select_related("author")
+                     .filter(author=self.request.user,
+                             date__month=current_month))
+
+        d = {
+            'Monday': [],
+            'Tuesday': [],
+            'Wednesday': [],
+            'Thursday': [],
+            'Friday': [],
+            'Saturday': [],
+            'Sunday': []
+        }
+
+        # Определение первого дня месяца
+        first_day_of_month = datetime(datetime.today().year, current_month, 1)
+
+        # Определение последнего дня месяца
+        last_day_of_month = datetime(datetime.today().year, current_month % 12 + 1, 1) - timedelta(days=1)
+
+        # Заполнение данными из query_set
+        for day in query_set:
+            day_of_week = day.date.strftime('%A')
+            d[day_of_week].append(day)
+
+        numberOfDays = calendar.monthrange(datetime.today().year, current_month)[1]  # кол-во месяцев в текущем месяце
+        first_day_of_the_week = first_day_of_month.strftime('%A')
+
+        # определяем какие дни заняты
+        filed_out_days = []
+        for day in query_set:
+            filed_out_days.append(day.date.day)
+
+        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        current_index = days.index(first_day_of_the_week)
+        size = 7  # т.к. в неделе 7 дней
+
+        for i in range(1, numberOfDays + 1):  # итерация по каждому дню месяца
+            if i in filed_out_days:  # занята ли дата экземпляром Slumber
+                current_index += 1
+                if current_index == size:
+                    current_index = 0
+                continue
+            d[days[current_index]].append(i)  # Добавляет день  в список для дня недели
+            current_index += 1
+            if current_index == size:
+                current_index = 0
+
+        # Сортировка
+        for day_of_week, values in d.items():
+            def custom_sort(val):
+                if isinstance(val, Water):
+                    return val.date.day
+                return val
+
+            d[day_of_week].sort(key=custom_sort)
+
+        # Добавляем пропуски первым элементом списка, если день в месяце не первый. Добавляем до того момента, пока не найдем первый день
+        """
+        Итог:
+            1 2 3
+        6 7 8 9 10
+        """
+        if 1 not in d['Monday']:
+            d['Monday'].insert(0, '-')
+            if 1 not in d['Tuesday']:
+                d['Tuesday'].insert(0, '-')
+                if 1 not in d['Wednesday']:
+                    d['Wednesday'].insert(0, '-')
+                    if 1 not in d['Thursday']:
+                        d['Thursday'].insert(0, '-')
+                        if 1 not in d['Friday']:
+                            d['Friday'].insert(0, '-')
+                            if 1 not in d['Saturday']:
+                                d['Saturday'].insert(0, '-')
+                                if 1 not in d['Sunday']:
+                                    d['Sunday'].insert(0, '-')
+
+        if d['Sunday'][0] == "-":
+            for k in d.keys():
+                d[k].pop(0)
+
+        return d
 
 
 class SlumberList(ListView):
@@ -161,7 +369,6 @@ class SlumberList(ListView):
             for k in d.keys():
                 d[k].pop(0)
 
-
         return d
 
     def get_context_data(self, **kwargs):
@@ -192,11 +399,28 @@ class SlumberCreateView(CreateView):
     success_url = reverse_lazy("main:sleeping")
 
 
+class CircleList(ListView):
+    models = CircleOfLifeBalance
+    success_url = reverse_lazy("main:circle")
+    context_object_name = "circle"
+
+    def get_queryset(self):
+        query_set = CircleOfLifeBalance.objects.filter(author=self.request.user).last()
+        return query_set
+
+
 class MoodList(ListView):
     model = Emotion
     context_object_name = "moods"
 
-    def get_queryset(self, current_month=datetime.today().month):
+    def get_queryset(self):
+        form = MonthSelectForm(self.request.GET)
+        if form.is_valid():
+            current_month = form.cleaned_data['month']
+        else:
+            # Если форма не была отправлена или данные не верны, используем текущий месяц
+            current_month = datetime.today().month
+
         query_set = (Emotion.objects.select_related("author")
                      .filter(author=self.request.user,
                              date__month=current_month))
@@ -284,6 +508,8 @@ class MoodList(ListView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
 
+        data['form'] = MonthSelectForm()
+
         current_month = datetime.today().month  # get the current month
         query_set = Emotion.objects.filter(author=self.request.user,
                                            date__month=current_month)
@@ -297,7 +523,9 @@ class MoodList(ListView):
             data['average_effort'] = round(count_average_effort / len(query_set), 1)
 
         emotions_counter = Counter(Emotion.objects.values_list("title", flat=True))
-        data['the_most_common_emotion'] = emotions_counter.most_common(1)[0][0]
+        if len(list(emotions_counter)) >= 1:
+            data['the_most_common_emotion'] = emotions_counter.most_common(1)[0][0]
+        else: data['the_most_common_emotion'] = "Недостаточно данных"
 
         return data
 
@@ -390,7 +618,6 @@ class PhysicalActivityList(ListView):
             for k in d.keys():
                 d[k].pop(0)
 
-
         return d
 
     def get_context_data(self, **kwargs):
@@ -416,7 +643,7 @@ class PhysicalActivityList(ListView):
         return data
 
 
-class PhysicalCreateView(CreateView, UpdateView):
+class PhysicalCreateView(CreateView):
     model = PhysicalActivity
     form_class = PhysicalActivityForm
     success_url = reverse_lazy("main:activity")
@@ -431,9 +658,11 @@ class EmotionCreateView(CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-class EmotionDeleteView(DeleteView):
-    model = Emotion
-    success_url = reverse_lazy("main:moods")
+
+def delete_emotion(request, emotion_id):
+    card = Emotion.objects.get(pk=emotion_id)
+    card.delete()
+    return redirect('main:moods')
 
 
 class EmotionUpdateView(UpdateView):

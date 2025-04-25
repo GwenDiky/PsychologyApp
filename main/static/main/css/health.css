@@ -1,0 +1,72 @@
+.block-gradient {
+    max-width: 550px;
+    padding: 1rem;
+    background: linear-gradient(90deg, #facee8 0%, #CCCCFF 100%);
+    border-radius: 30px;
+    position: relative;
+    margin-top: 40px;
+}
+
+
+.block-white {
+    opacity: 0px;
+    background: white;
+    border-radius: 30px;
+    padding: 2rem;
+}
+
+
+/* Стили для модального окна */
+.modal {
+  display: none; /* Скрываем по умолчанию */
+  position: fixed;
+  z-index: 100;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.9);
+}
+
+/* Стили для закрытия модального окна */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Стили для увеличенного изображения */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 90%;  /* Максимальная ширина изображения */
+  max-height: 90%; /* Максимальная высота изображения */
+}
+
+img:hover {
+    box-shadow: #facee8 0px 25px 20px -20px;
+}
+
+.purple-button:hover {
+    color: white;
+    background-color: #facee8;
+}
+
+.purple-button{
+    background-color: #CCCCFF;
+}

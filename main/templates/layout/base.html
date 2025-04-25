@@ -206,12 +206,23 @@
                   Трекеры
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{% url 'main:sleeping' %}">Трекер сна</a>
-                    <a class="dropdown-item" href="{% url 'main:activity' %}">Трекер физической нагрузки</a>
+                  <a class="dropdown-item" href="{% url 'main:sleeping' %}">Сон</a>
+                    <a class="dropdown-item" href="{% url 'main:activity' %}">Физическая нагрузка</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{% url 'main:moods' %}">Трекер эмоций</a>
+                  <a class="dropdown-item" href="{% url 'main:moods' %}">Эмоции</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'main:water' %}">Вода</a>
+                    <a class="dropdown-item" href="{% url 'main:diet' %}">Питание</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'main:health' %}">Здоровье</a>
+                    <a class="dropdown-item" href="{% url 'main:moods' %}">Психотерапия</a>
+
                 </div>
                 {% endif %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'main:circle' %}">Колесо баланса</a>
+                </li>
 
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -222,8 +233,8 @@
                       <a class="dropdown-item" href="{% url 'main:profile' %}">Профиль</a>
                       <a class="dropdown-item" href="{% url 'accounts:logout' %}">Выйти</a>
                       {% else %}
-                      <a class="dropdown-item" href="{% url 'accounts:login' %}">Войти</a>
-                      <a class="dropdown-item" href="{% url 'accounts:register_user' %}">Зарегистрироваться</a>
+                      <a class="dropdown-item" href="{% url 'main:signin' %}">Войти</a>
+                      <a class="dropdown-item" href="{% url 'main:signup' %}">Зарегистрироваться</a>
                       {% endif %}
 
                   </div>

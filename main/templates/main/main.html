@@ -22,7 +22,7 @@
                     благополучию начинается здесь.
                 </div>
                 <div class="row">
-                    <button class="purple-button">Еще</button>
+                    <button class="purple-button">Начать</button>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -37,7 +37,7 @@
           <img src="{% static 'main/img/image2.png' %}" class="img-fluid" alt="Responsive image">
         </div>
         <div class="col-sm">
-          <div class="row" id="text-second-section-bold">Мы - ваш гид в мире рефлексии и самопознания. </div>
+          <div class="row" id="text-second-section-bold">Мы - ваш гид в мире рефлексии и самопознания</div>
           <div class="row" id="text-second-section-light">
               Наше приложение создано, чтобы помочь вам раскрыть потенциал эмоциональной глубины.
               Вместе мы исследуем ваши чувства, осмыслим опыт и создадим пространство для внутреннего роста.
@@ -73,12 +73,12 @@
                         <div class="row upper-text">Психологические тесты</div>
                         <div class="row center-text">Позволят лучше понять себя и обеспечат персонализированный подход на вашем пути к эмоциональному равновесию.</div>
                         <div class="row bottom-text">
-                            <div class="col">Подробнее<a href="{% url 'main:tests' %}">→</a></div>
+                            <div class="col">Подробнее <a href="{% url 'main:tests' %}" style="color: #03A658;">→</a></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-1"></div>
+            <div class="col-lg-2"></div>
             <div class="col-lg-5" id="purple-block">
                 <div class="row">
                     <div class="col">
@@ -88,7 +88,7 @@
                         <div class="row upper-text">Трекер эмоций</div>
                         <div class="row center-text">Отследит колебания вашего настроения. Позволяет визуалировать ваше состояние. Определяйте тенденции, влияющие на вашу эмоциональную жизнь.</div>
                         <div class="row bottom-text">
-                            <div class="col">Подробнее<a href="{% url 'main:moods' %}">→</a></div>
+                            <div class="col">Подробнее <a href="{% url 'main:moods' %}" style="color: #EE4AFF;">→</a></div>
                         </div>
                     </div>
                 </div>
@@ -104,12 +104,12 @@
                         <div class="row upper-text">Дневник благодарности</div>
                         <div class="row center-text">Записывайте ежедневно те вещи, за которые вы благодарны и мыслите позитивно.</div>
                         <div class="row bottom-text">
-                            <div class="col">Подробнее <a href="{% url 'main:diary' %}">→</a></div>
+                            <div class="col">Подробнее <a href="{% url 'main:diary' %}" style="color: #FF48AC;">→</a></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-1"></div>
+            <div class="col-lg-2"></div>
             <div class="col-lg-5">
                 <div class="row" id="blue-block">
                     <div class="col">
@@ -119,7 +119,7 @@
                         <diпсv class="row upper-text">Статьи</diпсv>
                         <div class="row center-text">Наши статьи предоставляют полезные советы, глубокие исследования и практические методики для улучшения вашей эмоциональной жизни.</div>
                         <div class="row bottom-text">
-                            <div class="col">Подробнее <a href="{% url 'main:articles' %}">→</a></div>
+                            <div class="col">Подробнее <a href="{% url 'main:articles' %}" style="color: #3FCACA;">→</a></div>
                         </div>
                     </div>
                 </div>
@@ -159,15 +159,35 @@
             </div>
             <div class="col">
                 <div class="row">
-                    <div class="col"><button class="purple-button pink">Изучить больше</button></div>
+                    <div class="col"><button class="purple-button pink" data-toggle="modal" data-target="#myModal">Изучить больше</button></div>
                     <div class="col"><button class="purple-button white">Создать треккер</button></div>
                 </div>
             </div>
 
         </div>
     </div>
+    <hr>
 
-    <div class="container">
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Mus magna mattis tempor enim nisl viverra praesent! Euismod dapibus blandit torquent; ad feugiat venenatis. Taciti torquent iaculis fermentum mus class laoreet; lectus est. Blandit consequat luctus ad mattis fermentum nisl. Accumsan tempus ex ipsum vestibulum bibendum netus venenatis. Velit non rutrum taciti per quis urna. Senectus potenti dis viverra sodales turpis efficitur congue lectus condimentum.
+        Magna quisque aenean eleifend cras scelerisque nibh mollis. Dictum sed phasellus vulputate morbi dolor varius aenean molestie. Accumsan nulla mus tellus enim vivamus eget. Eros orci penatibus phasellus nisl ut et. Mi dui habitant ligula hac, dis feugiat elementum vitae phasellus. Ultrices nunc turpis maecenas vehicula dui auctor tristique nulla tristique. Tempus vel et eu turpis fames odio. Senectus ligula euismod nec eu magnis eget sollicitudin ornare.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+    <div class="container" style="margin-top: 40px;">
         <div class="row">
             <div class="col-sm-4"><img src="{% static 'main/img/Logo.png' %}" class="img-fluid" alt="Responsive image"><span class="date-warehouse">Управление эмоциями</span>
                 <div class="row sixth-main-text">Минск, 234<br>

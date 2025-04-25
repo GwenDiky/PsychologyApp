@@ -16,18 +16,17 @@
 <div class="additional-content">
         <div class="row">
             <div class="col-sm-4">
-                <p>Декабрь, 2023</p>
+                <p>Ноябрь, 2024</p>
             </div>
             <div class="col">
                 <a href="{% url 'main:mood-editor' %}">
-                      <button class="purple-button" style="margin-top: 20px; background-color: #FFDB58;">
+                      <button class="purple-button" style="margin-top: 20px; background-color: #7479d8;">
                           <span class="add">Добавить запись</span>
                       </button>
                 </a>
             </div>
         </div>
     </div>
-
 
         <div class="wrapper">
            <div></div>
@@ -74,19 +73,23 @@
                                             <p class="statistic-small-text" style="font-size: 30px;"><mark>Обстоятельства:</mark> {{ val.reason }}</p>
                                          {% endif %}
 
-                                          <a href="{% url 'main:mood-edit' val.id %}">
-                                              <button class="purple-button" style="margin-top: 20px; background-color: #FFDB58;">
-                                                  <span class="add">Редактировать</span>
-                                              </button>
-                                          </a>
 
-
-                                         <a href="{% url 'main:mood-delete' val.id %}">
-                                              <button class="purple-button" style="margin-top: 20px; background-color: #FFDB58;">
-                                                  <span class="add">Удалить</span>
-                                              </button>
-                                          </a>
-
+                                         <div class="row">
+                                             <div class="col">
+                                                  <a href="{% url 'main:mood-edit' val.id %}">
+                                                      <button class="purple-button" style="margin-top: 20px; background-color: #FFDB58;">
+                                                          <span class="add">Редактировать</span>
+                                                      </button>
+                                                  </a>
+                                             </div>
+                                             <div class="col">
+                                                 <a href="{% url 'main:mood-delete' val.id %}">
+                                                      <button class="purple-button" style="margin-top: 20px; background-color: #FFDB58;">
+                                                          <span class="add">Удалить</span>
+                                                      </button>
+                                                  </a>
+                                             </div>
+                                        </div>
                                      </div>
                                 </div>
                             </div>
@@ -116,6 +119,15 @@
         });
 
     </script>
+<br><br>
+<hr>
+
+    <form method="get" action="" style="margin-left: 100px; margin-right: 100px;">
+        {{ form.as_p }}
+        <button type="submit" class="purple-button" style="margin-top: 20px; background-color: #7479d8;">Выбрать месяц</button>
+    </form>
+
+
 
     <br><br>
 

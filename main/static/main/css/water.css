@@ -1,0 +1,34 @@
+img:hover{
+    box-shadow: none;}
+
+.paper-first-col{
+    height: 100%;
+    margin-top: 30px;
+
+    gap: 10px;
+
+    text-align: center;
+
+    border-right: 3px dashed #d1e3f1;
+    border-left: 3px dashed #d1e3f1;
+
+}
+
+.wrapper .dayOfWeek {
+    border-radius: 44px;
+    border: 2px var(--2, #212353) solid;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    text-align: center;
+    padding-right: 40px; padding-left: 40px;
+
+    color: var(--2, #);
+}
+
+.wrapper .dayOfWeek:hover{
+    border: 2px #92e6fd solid;
+    box-shadow: none;
+}
+

@@ -67,3 +67,12 @@ class EmotionForm(forms.ModelForm):
         self.fields['effort'].widget.attrs.update({'class': 'form-control'})
         self.fields['date'].widget.attrs.update({'class': 'form-control'})
         self.fields['reason'].widget.attrs.update({'class': 'form-control'})
+
+
+class MonthSelectForm(forms.Form):
+    month = forms.IntegerField(
+        label='Месяц',
+        min_value=1,
+        max_value=12,
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Введите номер месяца'})
+    )
